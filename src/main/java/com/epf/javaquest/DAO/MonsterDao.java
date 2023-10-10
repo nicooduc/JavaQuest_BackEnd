@@ -9,7 +9,5 @@ import java.util.List;
 
 @Repository
 public interface MonsterDao extends JpaRepository<Monster, Long> {
-    @Query(value = "SELECT m FROM Monster m")
-    List<Monster> getAllMonsters();
 
 }
