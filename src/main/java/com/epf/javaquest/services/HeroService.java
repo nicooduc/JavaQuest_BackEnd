@@ -65,11 +65,32 @@ public class HeroService {
 
     public int deleteHero (Hero hero){
         heroDao.delete(hero);
+        hero = null; // Permet bien de le détruire ?
         return 0;
     }
 
     public boolean isDead(Hero hero) {
         return hero.getHealthPoint() <= 0;
+    }
+
+    public Hero updateHealth(Hero hero, int hp_modifier) {
+        hero.setHealthPoint(hero.getHealthPoint() + hp_modifier);
+        return hero;
+    }
+
+    public Hero updateAttack(Hero hero, int atk_modifier){
+        hero.setAttackPoint(hero.getAttackPoint() + atk_modifier);
+        return hero;
+    }
+
+    public Hero updateDefense(Hero hero, int def_modifier){
+        hero.setDefensePoint(hero.getDefensePoint() + def_modifier);
+        return hero;
+    }
+
+    public Hero updateMagic(Hero hero,int mag_modifier){
+        hero.setMagicPoint(hero.getMagicPoint() + mag_modifier);
+        return hero;
     }
 
     /*

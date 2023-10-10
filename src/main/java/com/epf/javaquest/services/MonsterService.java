@@ -44,17 +44,30 @@ public class MonsterService {
         return monster.getHealthPoint() <= 0;
     }
 
-//    public Monster updateMonsterStat(Monster monster, int hp_modifier, int atk_modifier, int def_modifier, int mag_modifier){
-//        monster.setHealthPoint(monster.getHealthPoint() + hp_modifier);
-//        monster.setAttackPoint(monster.getAttackPoint() + atk_modifier);
-//        monster.setDefensePoint(monster.getDefensePoint() + def_modifier);
-//        monster.setMagicPoint(monster.getMagicPoint() + mag_modifier);
-//        return monster;
-//    }
+    public Monster updateHealth(Monster monster, int hp_modifier) {
+        monster.setHealthPoint(monster.getHealthPoint() + hp_modifier);
+        return monster;
+    }
 
-//    public int deleteMonster (Monster monster){
-//        return 0;
-//    }
+    public Monster updateAttack(Monster monster, int atk_modifier){
+        monster.setAttackPoint(monster.getAttackPoint() + atk_modifier);
+        return monster;
+    }
+
+    public Monster updateDefense(Monster monster, int def_modifier){
+        monster.setDefensePoint(monster.getDefensePoint() + def_modifier);
+        return monster;
+    }
+
+    public Monster updateMagic(Monster monster,int mag_modifier){
+        monster.setMagicPoint(monster.getMagicPoint() + mag_modifier);
+        return monster;
+    }
+
+    public int deleteMonster (Monster monster){
+        monster = null; // Permet bien de le détruire ?
+        return 0;
+    }
 
     /*
     classe à creer ? :

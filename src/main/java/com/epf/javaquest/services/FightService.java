@@ -40,21 +40,16 @@ public class FightService {
     public int playerChoice() {
         int choix;
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Veuillez entrer un chiffre : ");
-//        do {
-            System.out.println("Menu :");
-            System.out.println("1. Fonction 1");
-            System.out.println("2. Fonction 2");
-            System.out.println("3. Fonction 3");
-            System.out.println("4. Quitter");
-            System.out.print("Entrez votre choix (1-4) : ");
 
-            choix = scanner.nextInt();
-//        }
-//        while (!scanner.hasNextInt()) {
-//            System.out.print("Entrez un nombre valide (1-4) : ");
-//            scanner.next();
-//        }
+        System.out.print("Veuillez entrer un chiffre : ");
+        System.out.println("Menu :");
+        System.out.println("1. Fonction 1");
+        System.out.println("2. Fonction 2");
+        System.out.println("3. Fonction 3");
+        System.out.println("4. Quitter");
+        System.out.print("Entrez votre choix (1-4) : ");
+
+        choix = scanner.nextInt();
 
         scanner.close();
         return choix;
