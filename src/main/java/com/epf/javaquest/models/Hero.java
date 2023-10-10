@@ -1,49 +1,43 @@
 package com.epf.javaquest.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Setter
 @Getter
 @ToString
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
 @Table(name = "hero")
 public class Hero {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Lob
     @Column(name = "image")
     private byte[] image;
 
-    @Column(name = "level", nullable = false)
+    @Column(name = "level")
     private int level;
 
-    @Column(name = "health_point", nullable = false)
+    @Column(name = "health_point")
     private int healthPoint;
 
-    @Column(name = "attack_point", nullable = false)
+    @Column(name = "attack_point")
     private int attackPoint;
 
-    @Column(name = "defense_point", nullable = false)
+    @Column(name = "defense_point")
     private int defensePoint;
 
-    @Column(name = "magic_point", nullable = false)
+    @Column(name = "magic_point")
     private int magicPoint;
 
-    @Column(name = "exp", nullable = false, columnDefinition = "int default 0")
+    @Column(name = "exp")
     private int exp;
 
-    public Hero(String name, Object img, int level, int hp, int atk, int def, int mag, int exp) {
-    }
-
-    public Hero() {
-
-    }
 }

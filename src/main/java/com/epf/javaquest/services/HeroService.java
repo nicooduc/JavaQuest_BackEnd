@@ -2,6 +2,7 @@ package com.epf.javaquest.services;
 
 import com.epf.javaquest.DAO.HeroDao;
 import com.epf.javaquest.models.Hero;
+import com.epf.javaquest.models.Monster;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,15 @@ public class HeroService {
     private final static int LVL_INCR = 1;
 
     public Hero generateHero(String name, int level){
-        Hero hero = new Hero (name, null, level, HEALTH_POINT_MULT *level, ATTACK_POINT_MULT *level, DEFENSE_POINT_MULT *level, MAGIC_POINT_MULT *level, 0);
+        Hero hero = Hero.builder()
+                .name(name)
+                .level(level)
+                .healthPoint(HEALTH_POINT_MULT *level)
+                .attackPoint(ATTACK_POINT_MULT *level)
+                .defensePoint(DEFENSE_POINT_MULT *level)
+                .magicPoint(MAGIC_POINT_MULT *level)
+                .exp(0)
+                .build();
         return heroDao.save(hero);
     }
 
@@ -58,6 +67,11 @@ public class HeroService {
         heroDao.delete(hero);
         return 0;
     }
+
+    public boolean isDead(Hero hero) {
+        return hero.getHealthPoint() <= 0;
+    }
+
     /*
     classe à creer ? :
     equipItem

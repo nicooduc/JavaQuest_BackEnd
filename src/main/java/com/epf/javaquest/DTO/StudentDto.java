@@ -8,9 +8,9 @@ import java.util.List;
 @Builder
 @Getter
 public class StudentDto {
-    private String firstName;
-    private String lastName;
-    private Instant birthdate;
-    private List<Course> courses;
-    private Major major;
+//    private String firstName;
+//    private String lastName;
+//    private Instant birthdate;
+//    private List<Course> courses;
+//    private Major major;
 }

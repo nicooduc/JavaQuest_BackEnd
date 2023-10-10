@@ -16,12 +16,13 @@ create table monsters
     id SERIAL PRIMARY KEY,
     name TEXT not null,
     image bytea null,
-    hp_mult_min int not null,
-    hp_mult_max int not null,
-    atk_mult_min int not null,
-    atk_mult_max int not null,
-    def_mult_min int not null,
-    def_mult_max int not null,
-    mag_mult_min int not null,
-    mag_mult_max int not null
+    hp_min int not null,
+    hp_max int not null,
+    atk_min int not null,
+    atk_max int not null,
+    def_min int not null,
+    def_max int not null,
+    mag_min int not null,
+    mag_max int not null,
+    xp_drop int not null
 );
