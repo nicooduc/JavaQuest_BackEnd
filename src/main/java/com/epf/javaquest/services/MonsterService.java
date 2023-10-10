@@ -1,7 +1,7 @@
-package com.takima.backskeleton.services;
+package com.epf.javaquest.services;
 
-import com.takima.backskeleton.DAO.MonsterDao;
-import com.takima.backskeleton.models.Monster;
+import com.epf.javaquest.DAO.MonsterDao;
+import com.epf.javaquest.models.Monster;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

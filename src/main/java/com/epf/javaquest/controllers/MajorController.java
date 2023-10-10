@@ -1,4 +1,4 @@
-package com.takima.backskeleton.controllers;
+package com.epf.javaquest.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.takima.backskeleton;
+package com.epf.javaquest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

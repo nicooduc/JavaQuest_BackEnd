@@ -1,6 +1,6 @@
-package com.takima.backskeleton.DAO;
+package com.epf.javaquest.DAO;
 
-import com.takima.backskeleton.models.Monster;
+import com.epf.javaquest.models.Monster;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

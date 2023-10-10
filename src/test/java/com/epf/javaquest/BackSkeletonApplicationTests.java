@@ -1,4 +1,4 @@
-package com.takima.backskeleton;
+package com.epf.javaquest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

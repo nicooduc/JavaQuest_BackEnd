@@ -1,4 +1,4 @@
-package com.takima.backskeleton.models;
+package com.epf.javaquest.models;
 
 import jakarta.persistence.*;
 

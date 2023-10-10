@@ -1,6 +1,6 @@
-package com.takima.backskeleton.controllers;
+package com.epf.javaquest.controllers;
 
-import com.takima.backskeleton.DTO.StudentDto;
+import com.epf.javaquest.DTO.StudentDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

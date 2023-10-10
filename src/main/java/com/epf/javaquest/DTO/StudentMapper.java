@@ -1,4 +1,4 @@
-package com.takima.backskeleton.DTO;
+package com.epf.javaquest.DTO;
 
 import java.io.IOException;
 
