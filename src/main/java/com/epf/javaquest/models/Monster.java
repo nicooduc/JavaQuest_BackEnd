@@ -18,7 +18,7 @@ public class Monster {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "image")
@@ -48,7 +48,7 @@ public class Monster {
     @Column(name = "mag_max")
     private Integer magMax;
 
-    @Column(name = "xp_drop")
+    @Column(name = "xp_drop", nullable = false)
     private Integer xpDrop;
 
     @Transient

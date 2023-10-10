@@ -2,6 +2,7 @@ package com.epf.javaquest;
 
 import com.epf.javaquest.models.Hero;
 import com.epf.javaquest.models.Monster;
+import com.epf.javaquest.services.FightService;
 import com.epf.javaquest.services.HeroService;
 import com.epf.javaquest.services.MonsterService;
 import lombok.RequiredArgsConstructor;
@@ -13,9 +14,10 @@ import org.springframework.stereotype.Component;
 public class CLITest implements CommandLineRunner {
     private final HeroService heroService;
     private final MonsterService monsterService;
+    private final FightService fightService;
     @Override
     public void run(String... args) {
-        Hero hero = heroService.generateHero("Héros 1", 10);
+        Hero hero = heroService.generateHero("Héros 1", 1);
 
         // Affichez les statistiques du héros
         System.out.println("Héros : " + hero.getName());
@@ -35,6 +37,20 @@ public class CLITest implements CommandLineRunner {
         System.out.println("Points d'attaque : " + randomMonster.getAttackPoint());
         System.out.println("Points de défense : " + randomMonster.getDefensePoint());
         System.out.println("Points de magie : " + randomMonster.getMagicPoint());
+        System.out.println();
+
+        heroService.updateExp(hero, 108);
+
+        // Affichez les statistiques du héros
+        System.out.println("Héros lvl_up: " + hero.getName());
+        System.out.println("Niveau : " + hero.getLevel());
+        System.out.println("Points de vie : " + hero.getHealthPoint());
+        System.out.println("Points d'attaque : " + hero.getAttackPoint());
+        System.out.println("Points de défense : " + hero.getDefensePoint());
+        System.out.println("Points de magie : " + hero.getMagicPoint());
+        System.out.println();
+
+        fightService.turnFunction(hero, randomMonster);
 
     }
 }

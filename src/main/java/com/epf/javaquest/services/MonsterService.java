@@ -1,6 +1,7 @@
 package com.epf.javaquest.services;
 
 import com.epf.javaquest.DAO.MonsterDao;
+import com.epf.javaquest.models.Hero;
 import com.epf.javaquest.models.Monster;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,19 +13,17 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class MonsterService {
     private final MonsterDao monsterDao;
-    private final static int HEALTH_POINT_MULT = 8;
-    private final static int ATTACK_POINT_MULT = 5;
-    private final static int DEFENSE_POINT_MULT = 2;
-    private final static int MAGIC_POINT_MULT = 2;
-    private final static int LEVEL_UP_EXP_MULT = 100;
-    private final static int LVL_INCR = 1;
 
     public Monster generateMonster(long id) { // randomiser l'id dans la génération du combat
-        Monster monster = new Monster(monsterDao.findById(id).orElseThrow(RuntimeException::new));
-        monster.setAttackPoint(statisticRandomizer(monster.getAtkMin(), monster.getAtkMax()));
-        monster.setHealthPoint(statisticRandomizer(monster.getHpMin(), monster.getHpMax()));
-        monster.setDefensePoint(statisticRandomizer(monster.getDefMin(), monster.getDefMax()));
-        monster.setMagicPoint(statisticRandomizer(monster.getMagMin(), monster.getMagMax()));
+        Monster monsterBase = new Monster(monsterDao.findById(id).orElseThrow(RuntimeException::new));
+        Monster monster = Monster.builder()
+                .name(monsterBase.getName())
+                .healthPoint(statisticRandomizer(monsterBase.getHpMin(), monsterBase.getHpMax()))
+                .attackPoint(statisticRandomizer(monsterBase.getAtkMin(), monsterBase.getAtkMax()))
+                .defensePoint(statisticRandomizer(monsterBase.getDefMin(), monsterBase.getDefMax()))
+                .magicPoint(statisticRandomizer(monsterBase.getMagMin(), monsterBase.getMagMax()))
+                .xpDrop(monsterBase.getXpDrop())
+                .build();
         return monster;
     }
 
