@@ -1,5 +1,6 @@
 package com.epf.javaquest.models;
 
+import io.swagger.v3.oas.models.headers.Header;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,8 +13,11 @@ import java.util.Optional;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
-@Table(name = "monsters" )
+@Table(name = "monsters")
 public class Monster {
+    private static final int DEFENSE_MODIFIER = 2;
+    private static final int HEALTH_MODIFIER = 2;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -51,6 +55,13 @@ public class Monster {
     @Column(name = "xp_drop", nullable = false)
     private Integer xpDrop;
 
+    @Column(name = "speed_min")
+    private int speedMin;
+
+    @Column(name = "speed_max")
+    private int speedMax;
+
+
     @Transient
     private int healthPoint;
     @Transient
@@ -59,6 +70,8 @@ public class Monster {
     private int defensePoint;
     @Transient
     private int magicPoint;
+    @Transient
+    private int speedPoint;
 
     public Monster(Monster monster) {
         this.id = monster.getId();
@@ -73,30 +86,43 @@ public class Monster {
         this.magMin = monster.getMagMin();
         this.magMax = monster.getMagMax();
         this.xpDrop = monster.getXpDrop();
+        this.speedMin = monster.getSpeedMin();
+        this.speedMax = monster.getSpeedMax();
         this.healthPoint = monster.getHealthPoint();
         this.attackPoint = monster.getAttackPoint();
         this.defensePoint = monster.getDefensePoint();
         this.magicPoint = monster.getMagicPoint();
+        this.speedPoint = monster.getSpeedPoint();
     }
 
-    public Monster updateHealth(Monster monster, int hp_modifier) {
-        monster.setHealthPoint(monster.getHealthPoint() + hp_modifier);
-        return monster;
+    public void updateHealth(int hp_modifier) {
+        healthPoint += hp_modifier;
     }
 
-    public Monster updateAttack(Monster monster, int atk_modifier){
-        monster.setAttackPoint(monster.getAttackPoint() + atk_modifier);
-        return monster;
+    public void updateAttack(int atk_modifier) {
+        attackPoint += atk_modifier;
     }
 
-    public Monster updateDefense(Monster monster, int def_modifier){
-        monster.setDefensePoint(monster.getDefensePoint() + def_modifier);
-        return monster;
+    public void updateDefense(int def_modifier) {
+        defensePoint += def_modifier;
     }
 
-    public Monster updateMagic(Monster monster,int mag_modifier){
-        monster.setMagicPoint(monster.getMagicPoint() + mag_modifier);
-        return monster;
+    public void updateMagic(int mag_modifier) {
+        magicPoint += mag_modifier;
+    }
+
+    public void choiceDefense() {
+        System.out.println("PASSAGE EN MODE DEFENSE DU MONSTRE (yuuuuu-gi-ooooh)");
+        defensePoint *= DEFENSE_MODIFIER;
+
+    }
+
+    public void resetDefense() {
+        System.out.println("PLUS PASSAGE EN MODE DEFENSE DU MONSTRE (yuuuuu-gi-ooooh)");
+        defensePoint /= DEFENSE_MODIFIER;
+    }
+    public void regenHealthMag(){
+        healthPoint += HEALTH_MODIFIER;
     }
 
 }

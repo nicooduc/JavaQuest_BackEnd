@@ -49,6 +49,7 @@ public class CLITest implements CommandLineRunner {
         System.out.println("Points de défense : " + hero.getDefensePoint());
         System.out.println("Points de magie : " + hero.getMagicPoint());
         System.out.println();
+        System.out.println("__________________________");
 
         fightService.turnFunction(hero, randomMonster);
 

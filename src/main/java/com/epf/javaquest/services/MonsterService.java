@@ -22,6 +22,7 @@ public class MonsterService {
                 .attackPoint(statisticRandomizer(monsterBase.getAtkMin(), monsterBase.getAtkMax()))
                 .defensePoint(statisticRandomizer(monsterBase.getDefMin(), monsterBase.getDefMax()))
                 .magicPoint(statisticRandomizer(monsterBase.getMagMin(), monsterBase.getMagMax()))
+                .speedPoint(statisticRandomizer(monsterBase.getSpeedMin(), monsterBase.getSpeedMax()))
                 .xpDrop(monsterBase.getXpDrop())
                 .build();
         return monster;
