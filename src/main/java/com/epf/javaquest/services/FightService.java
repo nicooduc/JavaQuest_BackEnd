@@ -16,6 +16,13 @@ public class FightService {
         int playerChoice = playerChoice();
         int monsterChoice = monsterChoice();
 
+        if (playerChoice == 2) {
+
+        }
+        if (monsterChoice == 2) {
+
+        }
+
         switch (playerChoice) {
             case 1:
                 System.out.println("Atk");
@@ -39,15 +46,15 @@ public class FightService {
 
     public int playerChoice() {
         int choix;
+
+        // TODO connexion frontend
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Veuillez entrer un chiffre : ");
-        System.out.println("Menu :");
-        System.out.println("1. Fonction 1");
-        System.out.println("2. Fonction 2");
-        System.out.println("3. Fonction 3");
-        System.out.println("4. Quitter");
-        System.out.print("Entrez votre choix (1-4) : ");
+        System.out.println("1. Atk");
+        System.out.println("2. Def");
+        System.out.println("3. Mag");
+        System.out.print("Entrez votre choix (1-3) : ");
 
         choix = scanner.nextInt();
 

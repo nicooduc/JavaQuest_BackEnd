@@ -40,4 +40,24 @@ public class Hero {
     @Column(name = "exp", nullable = false)
     private int exp;
 
+    public Hero updateHealth(Hero hero, int hp_modifier) {
+        hero.setHealthPoint(hero.getHealthPoint() + hp_modifier);
+        return hero;
+    }
+
+    public Hero updateAttack(Hero hero, int atk_modifier){
+        hero.setAttackPoint(hero.getAttackPoint() + atk_modifier);
+        return hero;
+    }
+
+    public Hero updateDefense(Hero hero, int def_modifier){
+        hero.setDefensePoint(hero.getDefensePoint() + def_modifier);
+        return hero;
+    }
+
+    public Hero updateMagic(Hero hero,int mag_modifier){
+        hero.setMagicPoint(hero.getMagicPoint() + mag_modifier);
+        return hero;
+    }
+
 }
