@@ -17,14 +17,13 @@ public class HeroService {
     private final static int LEVEL_UP_EXP_MULT = 100;
     private final static int LVL_INCR = 1;
 
-    public Hero generateHero(String name, int level){
+    public Hero generateHero(String name, int level) {
         Hero hero = Hero.builder()
-                .name(name)
-                .level(level)
-                .healthPoint(HEALTH_POINT_MULT *level)
-                .attackPoint(ATTACK_POINT_MULT *level)
-                .defensePoint(DEFENSE_POINT_MULT *level)
-                .magicPoint(MAGIC_POINT_MULT *level)
+                .name(name).level(level)
+                .healthPoint(HEALTH_POINT_MULT * level)
+                .attackPoint(ATTACK_POINT_MULT * level)
+                .defensePoint(DEFENSE_POINT_MULT * level)
+                .magicPoint(MAGIC_POINT_MULT * level)
                 .exp(0)
                 .build();
         return heroDao.save(hero);
@@ -34,11 +33,10 @@ public class HeroService {
         return heroDao.findById(id).get();
     }
 
-    public Hero updateExp (Hero hero, int exp_gain){
+    public Hero updateExp(Hero hero, int exp_gain) {
         int current_exp = hero.getExp() + exp_gain;
         int exp_to_levelup = hero.getLevel() * LEVEL_UP_EXP_MULT;
-        if (current_exp >= exp_to_levelup)
-        {
+        if (current_exp >= exp_to_levelup) {
             hero.setExp(current_exp - exp_to_levelup);
             updateHeroLevel(hero);
         } else {
@@ -48,13 +46,14 @@ public class HeroService {
         return hero;
     }
 
-    public Hero updateHeroLevel(Hero hero){
+    public Hero updateHeroLevel(Hero hero) {
         hero.setLevel(hero.getLevel() + LVL_INCR);
         hero = updateHeroStat(hero, HEALTH_POINT_MULT, ATTACK_POINT_MULT, DEFENSE_POINT_MULT, MAGIC_POINT_MULT);
+        System.out.println("LVL UP !!!!");
         return hero;
     }
 
-    public Hero updateHeroStat(Hero hero, int hp_modifier, int atk_modifier, int def_modifier, int mag_modifier){
+    public Hero updateHeroStat(Hero hero, int hp_modifier, int atk_modifier, int def_modifier, int mag_modifier) {
         hero.setHealthPoint(hero.getHealthPoint() + hp_modifier);
         hero.setAttackPoint(hero.getAttackPoint() + atk_modifier);
         hero.setDefensePoint(hero.getDefensePoint() + def_modifier);
@@ -63,14 +62,10 @@ public class HeroService {
         return hero;
     }
 
-    public int deleteHero (Hero hero){
+    public int deleteHero(Hero hero) {
         heroDao.delete(hero);
         hero = null; // Permet bien de le détruire ?
         return 0;
-    }
-
-    public boolean isDead(Hero hero) {
-        return hero.getHealthPoint() <= 0;
     }
 
     /*

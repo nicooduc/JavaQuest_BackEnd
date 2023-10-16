@@ -15,9 +15,6 @@ import java.util.Optional;
 @NoArgsConstructor
 @Table(name = "monsters")
 public class Monster {
-    private static final int DEFENSE_MODIFIER = 2;
-    private static final int HEALTH_MODIFIER = 2;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -60,69 +57,5 @@ public class Monster {
 
     @Column(name = "speed_max")
     private int speedMax;
-
-
-    @Transient
-    private int healthPoint;
-    @Transient
-    private int attackPoint;
-    @Transient
-    private int defensePoint;
-    @Transient
-    private int magicPoint;
-    @Transient
-    private int speedPoint;
-
-    public Monster(Monster monster) {
-        this.id = monster.getId();
-        this.name = monster.getName();
-        this.image = monster.getImage();
-        this.hpMin = monster.getHpMin();
-        this.hpMax = monster.getHpMax();
-        this.atkMin = monster.getAtkMin();
-        this.atkMax = monster.getAtkMax();
-        this.defMin = monster.getDefMin();
-        this.defMax = monster.getDefMax();
-        this.magMin = monster.getMagMin();
-        this.magMax = monster.getMagMax();
-        this.xpDrop = monster.getXpDrop();
-        this.speedMin = monster.getSpeedMin();
-        this.speedMax = monster.getSpeedMax();
-        this.healthPoint = monster.getHealthPoint();
-        this.attackPoint = monster.getAttackPoint();
-        this.defensePoint = monster.getDefensePoint();
-        this.magicPoint = monster.getMagicPoint();
-        this.speedPoint = monster.getSpeedPoint();
-    }
-
-    public void updateHealth(int hp_modifier) {
-        healthPoint += hp_modifier;
-    }
-
-    public void updateAttack(int atk_modifier) {
-        attackPoint += atk_modifier;
-    }
-
-    public void updateDefense(int def_modifier) {
-        defensePoint += def_modifier;
-    }
-
-    public void updateMagic(int mag_modifier) {
-        magicPoint += mag_modifier;
-    }
-
-    public void choiceDefense() {
-        System.out.println("PASSAGE EN MODE DEFENSE DU MONSTRE (yuuuuu-gi-ooooh)");
-        defensePoint *= DEFENSE_MODIFIER;
-
-    }
-
-    public void resetDefense() {
-        System.out.println("PLUS PASSAGE EN MODE DEFENSE DU MONSTRE (yuuuuu-gi-ooooh)");
-        defensePoint /= DEFENSE_MODIFIER;
-    }
-    public void regenHealthMag(){
-        healthPoint += HEALTH_MODIFIER;
-    }
 
 }

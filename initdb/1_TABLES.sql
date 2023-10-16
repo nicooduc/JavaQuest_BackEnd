@@ -29,3 +29,15 @@ create table monsters
     speed_min int  not null,
     speed_max int  not null
 );
+
+create table opponent
+(
+    id            SERIAL PRIMARY KEY,
+    type          TEXT not null,
+    image         bytea null,
+    health_point  int  not null,
+    attack_point  int  not null,
+    defense_point int  not null,
+    magic_point   int  not null,
+    speed         int  not null
+);
