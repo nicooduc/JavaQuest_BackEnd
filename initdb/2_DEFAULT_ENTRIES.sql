@@ -8,4 +8,7 @@ INSERT INTO monsters (name, image, hp_min, hp_max, atk_min, atk_max, def_min, de
 INSERT INTO monsters (name, image, hp_min, hp_max, atk_min, atk_max, def_min, def_max, mag_min, mag_max, xp_drop, speed_min,speed_max)
     VALUES ('Monster3', NULL, 1, 2, 2, 4, 3, 5, 1, 2, 45, 1, 8);
 
-
+INSERT INTO opponent (type, image, health_point, attack_point, defense_point, magic_point, speed)
+VALUES ('Opponent1', NULL, 80, 70, 40, 30,4);
+INSERT INTO opponent (type, image, health_point, attack_point, defense_point, magic_point, speed)
+VALUES ('Opponent2', NULL, 8, 7, 4, 3,40);
