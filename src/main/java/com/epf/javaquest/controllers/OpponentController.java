@@ -30,7 +30,7 @@ public class OpponentController {
     }
 
     @GetMapping("/{id}")
-    public Opponent getOpponentId(@PathVariable Long id) {
+    public Opponent getOpponentById(@PathVariable Long id) {
         return opponentService.getById(id);
     }
 
@@ -40,12 +40,12 @@ public class OpponentController {
     }
 
     @PostMapping("")
-    public void addStudent(@RequestBody OpponentDto opponentDto) {
+    public void addOpponent(@RequestBody OpponentDto opponentDto) {
         opponentService.addOpponent(opponentDto);
     }
 
     @PostMapping("/{id}")
-    public void updateStudent(@RequestBody OpponentDto opponentDto, @PathVariable Long id) {
+    public void updateOpponent(@RequestBody OpponentDto opponentDto, @PathVariable Long id) {
         opponentService.updateOpponent(opponentDto, id);
     }
 }
