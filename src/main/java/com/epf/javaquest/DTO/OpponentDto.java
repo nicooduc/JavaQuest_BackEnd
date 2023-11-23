@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class OpponentDto {
     private String type;
+    private String name;
     private int healthPoint;
     private int attackPoint;
     private int defensePoint;

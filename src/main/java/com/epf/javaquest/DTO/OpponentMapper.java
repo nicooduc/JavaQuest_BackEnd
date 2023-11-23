@@ -12,6 +12,7 @@ public class OpponentMapper {
     public static Opponent fromDto(OpponentDto dto) {
         return Opponent.builder()
                 .type(dto.getType())
+                .name(dto.getName())
                 .healthPoint(dto.getHealthPoint())
                 .attackPoint(dto.getAttackPoint())
                 .defensePoint(dto.getDefensePoint())
@@ -23,6 +24,7 @@ public class OpponentMapper {
     public static OpponentDto toDto (Opponent opponent){
         return OpponentDto.builder()
                 .type(opponent.getType())
+                .name(opponent.getName())
                 .healthPoint(opponent.getHealthPoint())
                 .attackPoint(opponent.getAttackPoint())
                 .defensePoint(opponent.getDefensePoint())

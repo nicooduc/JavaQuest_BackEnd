@@ -18,13 +18,6 @@ public class OpponentController {
     // TODO - Exemple des requetes possibles - supprimer la majorité
 
     @GetMapping("")
-//    public List<Opponent> listStudents(@RequestParam(required = false) Integer majorId, @RequestParam(required = false) Integer courseId) {
-//        if (majorId != null && courseId !=null) {
-//            return opponentService.searchByMajorAndCourse(majorId, courseId);
-//        }
-//        return opponentService.findAll();
-//    }
-
     public List<Opponent> listOpponents() {
         return opponentService.findAll();
     }

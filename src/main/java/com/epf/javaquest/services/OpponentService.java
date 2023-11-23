@@ -23,6 +23,7 @@ public class OpponentService {
     public Opponent generateTempHero(Hero hero) {
         Opponent opponent = Opponent.builder()
                 .type("hero")
+                .name(hero.getName())
                 .healthPoint(hero.getHealthPoint())
                 .attackPoint(hero.getAttackPoint())
                 .defensePoint(hero.getDefensePoint())
@@ -35,6 +36,7 @@ public class OpponentService {
     public Opponent generateTempMonster(Monster monster) {
         Opponent opponent = Opponent.builder()
                 .type("monster")
+                .name(monster.getName())
                 .healthPoint(statisticRandomizer(monster.getHpMin(), monster.getHpMax()))
                 .attackPoint(statisticRandomizer(monster.getAtkMin(), monster.getAtkMax()))
                 .defensePoint(statisticRandomizer(monster.getDefMin(), monster.getDefMax()))
