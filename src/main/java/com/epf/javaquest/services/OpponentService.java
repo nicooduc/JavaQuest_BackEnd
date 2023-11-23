@@ -94,4 +94,32 @@ public class OpponentService {
         generateTempMonster(monsterService.getMonsterById(1));
         return opponentDao.findAll();
     }
+
+    public List<Opponent> heroAttack() {
+        int hero;
+        int monster;
+        List<Opponent> opponents = opponentDao.findAll();
+        if (opponents.get(0).getType() .equals("hero")) {
+            hero = 0;
+            monster = 1;
+        } else {
+            hero = 1;
+            monster = 0;
+        }
+        System.out.println(opponents.get(hero).getName());
+
+        int atk = opponents.get(hero).getAttackPoint();
+        int def = opponents.get(monster).getDefensePoint();
+        int dmgDone = atk - def;
+
+        if (dmgDone > 0) {
+            System.out.println(opponents.get(hero).getName());
+            opponents.get(monster).updateHealth(-dmgDone);
+        } else {
+            System.out.println(opponents.get(monster).getType() + "Defense Too Big !");
+        }
+
+        opponentDao.save(opponents.get(monster));
+        return opponents;
+    }
 }

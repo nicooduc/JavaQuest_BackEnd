@@ -44,6 +44,7 @@ public class Opponent {
     private int speed;
 
     public void updateHealth(int hp_modifier) {
+        System.out.println(name);
         healthPoint += hp_modifier;
     }
 

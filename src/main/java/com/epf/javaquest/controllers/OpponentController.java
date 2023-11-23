@@ -2,6 +2,7 @@ package com.epf.javaquest.controllers;
 
 import com.epf.javaquest.DTO.OpponentDto;
 import com.epf.javaquest.models.Opponent;
+import com.epf.javaquest.services.FightService;
 import com.epf.javaquest.services.OpponentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,10 @@ public class OpponentController {
         return opponentService.startCombat();
     }
 
+    @GetMapping("/attack")
+    public List<Opponent> attack() {
+        return opponentService.heroAttack();
+    }
     @GetMapping("")
     public List<Opponent> listOpponents() {
         return opponentService.findAll();
