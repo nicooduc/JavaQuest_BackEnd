@@ -34,6 +34,7 @@ create table opponent
 (
     id            SERIAL PRIMARY KEY,
     type          TEXT not null,
+    name          TEXT not null ,
     image         bytea null,
     health_point  int  not null,
     attack_point  int  not null,

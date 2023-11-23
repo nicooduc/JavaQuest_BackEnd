@@ -17,6 +17,8 @@ import java.util.Random;
 public class OpponentService {
     private final OpponentDao opponentDao;
     private final OpponentMapper opponentMapper;
+    private final HeroService heroService;
+    private final MonsterService monsterService;
 
     // TODO ajouter les saves en base
 
@@ -30,6 +32,7 @@ public class OpponentService {
                 .magicPoint(hero.getMagicPoint())
                 .speed(hero.getSpeed())
                 .build();
+        opponentDao.save(opponent);
         return opponent;
     }
 
@@ -43,6 +46,7 @@ public class OpponentService {
                 .magicPoint(statisticRandomizer(monster.getMagMin(), monster.getMagMax()))
                 .speed(statisticRandomizer(monster.getSpeedMin(), monster.getSpeedMax()))
                 .build();
+        opponentDao.save(opponent);
         return opponent;
     }
 
@@ -64,6 +68,9 @@ public class OpponentService {
     public void deleteById(Long id) {
         opponentDao.deleteById(id);
     }
+    public void deleteAll() {
+        opponentDao.deleteAll();
+    }
 
     public void addOpponent(OpponentDto opponentDto) {
         Opponent opponent = opponentMapper.fromDto(opponentDto);
@@ -79,5 +86,12 @@ public class OpponentService {
         opponent.setMagicPoint(opponentDto.getMagicPoint());
         opponent.setSpeed(opponentDto.getSpeed());
         opponentDao.save(opponent);
+    }
+
+    public List<Opponent> startCombat() {
+        deleteAll();
+        generateTempHero(heroService.generateHero("Kop",1));
+        generateTempMonster(monsterService.getMonsterById(1));
+        return opponentDao.findAll();
     }
 }

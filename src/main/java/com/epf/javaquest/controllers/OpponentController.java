@@ -15,7 +15,10 @@ import java.util.List;
 public class OpponentController {
     private final OpponentService opponentService;
 
-    // TODO - Exemple des requetes possibles - supprimer la majorité
+    @GetMapping("/startCombat")
+    public List<Opponent> startCombat() {
+        return opponentService.startCombat();
+    }
 
     @GetMapping("")
     public List<Opponent> listOpponents() {
