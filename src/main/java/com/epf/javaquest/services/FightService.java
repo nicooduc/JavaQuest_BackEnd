@@ -16,9 +16,11 @@ public class FightService {
     private final OpponentDao opponentDao;
 
     public List<Opponent> turn(String actionHero) {
+        System.out.println("Choix du hero : " + actionHero);
         int heroIndex;
         int monsterIndex;
         String actionMonster = actionMonster();
+        System.out.println("Choix du monstre : " + actionMonster);
         //TODO récupérer les hero et monstres de la base
         List<Opponent> opponents = opponentDao.findAll();
         if (opponents.get(0).getType().equals("hero")) {
@@ -30,22 +32,27 @@ public class FightService {
         }
         Opponent tempHero = opponents.get(heroIndex);
         Opponent tempMonster = opponents.get(monsterIndex);
+        System.out.println("tempHero.type = " + tempHero.getType());
+        System.out.println("tempMonster.type = " + tempMonster.getType());
         int speedHero = opponents.get(heroIndex).getSpeed();
         int speedMonster = opponents.get(monsterIndex).getSpeed();
 
 
         if (Objects.equals(actionHero, "defend")) {
+            System.out.println("Le hero se prepare a encaisser");
             tempHero.choiceDefense();
         }
         if (Objects.equals(actionMonster, "defend")) {
-            System.out.println("Il se prépare à encaisser !");
+            System.out.println("Le monstre se prépare a encaisser");
             tempMonster.choiceDefense();
         }
 
         if (speedMonster <= speedHero) {
+            System.out.println("Le hero a l'initiative");
             actionPlayer(tempHero, tempMonster, actionHero);
             actionMonster(tempMonster, tempHero, actionMonster);
         } else {
+            System.out.println("Le monstre a l'initiative");
             actionMonster(tempMonster, tempHero, actionMonster);
             actionPlayer(tempHero, tempMonster, actionHero);
         }
@@ -57,7 +64,7 @@ public class FightService {
 
     private String actionMonster() {
         Random random = new Random();
-        return switch (random.nextInt(3)) {
+        return switch (random.nextInt(4)) {
             case 0 -> "defend";
             case 1 -> "attack";
             case 2 -> "castMagic";
@@ -66,13 +73,15 @@ public class FightService {
     }
 
     private void actionPlayer(Opponent tempHero, Opponent tempMonster, String playerChoice) {
+        System.out.println("Le joueur a choisi l'action " + playerChoice);
+        System.out.println("Le type du joueur est : " +tempHero.getType());
         switch (playerChoice) {
             case "attack":
-                System.out.println("Atk");
+                System.out.println("Le hero attaque");
                 attack(tempHero, tempMonster);
                 break;
             case "castMagic":
-                System.out.println("Mag");
+                System.out.println("Le hero se soigne");
                 tempHero.regenHealthMag();
                 break;
         }
@@ -80,16 +89,18 @@ public class FightService {
 
 
     private void actionMonster(Opponent tempMonster, Opponent tempHero, String monsterChoice) {
+        System.out.println("Le monstre a choisi l'action " + monsterChoice);
+        System.out.println("Le type du monstre est : " + tempMonster.getType());
         switch (monsterChoice) {
             case "afk":
-                System.out.println("afk");
+                System.out.println("Le monstre est afk");
                 break;
             case "attack":
-                System.out.println("Atk monster");
+                System.out.println("Le monstre attaque");
                 attack(tempMonster, tempHero);
                 break;
             case "castMagic":
-                System.out.println("MAGIIIIE (du monstre)");
+                System.out.println("Le monstre se soigne");
                 tempMonster.regenHealthMag();
         }
     }
