@@ -1,6 +1,5 @@
 package com.epf.javaquest.controllers;
 
-import com.epf.javaquest.DTO.OpponentDto;
 import com.epf.javaquest.models.Opponent;
 import com.epf.javaquest.services.FightService;
 import com.epf.javaquest.services.OpponentService;
@@ -17,6 +16,7 @@ public class FightController {
     private final OpponentService opponentService;
     private final FightService fightService;
 
+    //TODO startCombat doit pouvoir prendre l'id du monstre
     @GetMapping("/startCombat")
     public List<Opponent> startCombat() {
         return opponentService.startCombat();
@@ -31,6 +31,7 @@ public class FightController {
 
 
 
+    // TODO touts les objets sont sensé être des DTO ici
 
     // TODO supprimer les lignes suivantes après s'en être inspiré
 
@@ -50,12 +51,12 @@ public class FightController {
     }
 
     @PostMapping("")
-    public void addOpponent(@RequestBody OpponentDto opponentDto) {
-        opponentService.addOpponent(opponentDto);
+    public void addOpponent(@RequestBody Opponent opponent) {
+        opponentService.addOpponent(opponent);
     }
 
     @PostMapping("/{id}")
-    public void updateOpponent(@RequestBody OpponentDto opponentDto, @PathVariable Long id) {
-        opponentService.updateOpponent(opponentDto, id);
+    public void updateOpponent(@RequestBody Opponent opponent, @PathVariable Long id) {
+        opponentService.updateOpponent(opponent, id);
     }
 }

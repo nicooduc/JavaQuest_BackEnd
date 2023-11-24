@@ -12,6 +12,8 @@ import java.util.Random;
 public class MonsterService {
     private final MonsterDao monsterDao;
 
+    //TODO classe probablement a supprimer
+
     public Monster getMonsterById(long id) {
         return monsterDao.findById(id).get();
     }

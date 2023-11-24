@@ -1,10 +1,5 @@
 package com.epf.javaquest;
 
-import com.epf.javaquest.models.Hero;
-import com.epf.javaquest.models.Monster;
-import com.epf.javaquest.services.FightService;
-import com.epf.javaquest.services.HeroService;
-import com.epf.javaquest.services.MonsterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -12,9 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class CLITest implements CommandLineRunner {
-    private final HeroService heroService;
-    private final MonsterService monsterService;
-    private final FightService fightService;
 
     @Override
     public void run(String... args) {

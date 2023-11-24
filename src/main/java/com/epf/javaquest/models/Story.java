@@ -25,6 +25,9 @@ public class Story {
     @Column(name = "localisation", nullable = false)
     private String localisation;
 
+    @Column(name = "image")
+    private String image;
+
     @Column(name = "option1", nullable = false)
     private String option1;
 
@@ -48,5 +51,8 @@ public class Story {
 
     @Column(name = "redirection4", nullable = false)
     private int redirection4;
+
+    @Column(name = "effects")
+    private String effects;
 
 }

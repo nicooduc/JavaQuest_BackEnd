@@ -26,7 +26,7 @@ public class Opponent {
     private String name;
 
     @Column(name = "image")
-    private byte[] image;
+    private String image;
 
     @Column(name = "health_point", nullable = false)
     private int healthPoint;

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class StoryController {
     private final StoryService storyService;
 
+    //TODO startStory doit pouvoir reprendre le dernier id
     @GetMapping("/startStory")
     public Story startStory() {
         return storyService.startStory();
@@ -23,4 +24,6 @@ public class StoryController {
     public Story storyChoice(@PathVariable int choice) {
         return storyService.storyChoice(choice);
     }
+
+    // TODO touts les objets sont sensé être des DTO ici
 }

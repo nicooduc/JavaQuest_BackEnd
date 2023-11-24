@@ -11,6 +11,8 @@ public class StoryMapper {
         return Story.builder()
                 .descriptionID(dto.getDescriptionID())
                 .textDescription(dto.getTextDescription())
+                .localisation(dto.getLocalisation())
+                .image(dto.getImage())
                 .option1(dto.getOption1())
                 .redirection1(dto.getRedirection1())
                 .option2(dto.getOption2())
@@ -19,6 +21,7 @@ public class StoryMapper {
                 .redirection3(dto.getRedirection3())
                 .option4(dto.getOption4())
                 .redirection4(dto.getRedirection4())
+                .effects(dto.getEffects())
                 .build();
     }
 
@@ -26,6 +29,8 @@ public class StoryMapper {
         return StoryDto.builder()
                 .descriptionID(story.getDescriptionID())
                 .textDescription(story.getTextDescription())
+                .localisation(story.getLocalisation())
+                .image(story.getImage())
                 .option1(story.getOption1())
                 .redirection1(story.getRedirection1())
                 .option2(story.getOption2())
@@ -34,6 +39,7 @@ public class StoryMapper {
                 .redirection3(story.getRedirection3())
                 .option4(story.getOption4())
                 .redirection4(story.getRedirection4())
+                .effects(story.getEffects())
                 .build();
     }
 }

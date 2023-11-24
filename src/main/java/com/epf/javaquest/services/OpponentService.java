@@ -1,8 +1,7 @@
 package com.epf.javaquest.services;
 
+import com.epf.javaquest.DAO.MonsterDao;
 import com.epf.javaquest.DAO.OpponentDao;
-import com.epf.javaquest.DTO.OpponentDto;
-import com.epf.javaquest.DTO.OpponentMapper;
 import com.epf.javaquest.models.Hero;
 import com.epf.javaquest.models.Monster;
 import com.epf.javaquest.models.Opponent;
@@ -16,18 +15,16 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class OpponentService {
     private final OpponentDao opponentDao;
-    private final OpponentMapper opponentMapper;
-    private final HeroService heroService;
-    private final MonsterService monsterService;
+    private final MonsterDao monsterDao;
 
     public List<Opponent> startCombat() {
-        deleteAll();
-        generateTempHero(heroService.generateHero("Kop", 1));
-        generateTempMonster(monsterService.getMonsterById(1));
+        opponentDao.deleteAll();
+        generateOpponentHero(Hero.createHero("Kop", 1));
+        generateOpponentMonster(monsterDao.findById(1L).get());
         return opponentDao.findAll();
     }
 
-    private void generateTempHero(Hero hero) {
+    private void generateOpponentHero(Hero hero) {
         Opponent opponent = Opponent.builder()
                 .type("Hero")
                 .name(hero.getName())
@@ -40,7 +37,7 @@ public class OpponentService {
         opponentDao.save(opponent);
     }
 
-    private void generateTempMonster(Monster monster) {
+    private void generateOpponentMonster(Monster monster) {
         Opponent opponent = Opponent.builder()
                 .type("Monster")
                 .name(monster.getName())
@@ -58,10 +55,12 @@ public class OpponentService {
         return random.nextInt(stat_max - stat_min + 1) + stat_min;
     }
 
+    //TODO vérification de la mort des opponents
+
 
     // TODO toutes les fonctions en dessous étaient pour le fonctionnement backend
 
-    // TODO ajouter les saves en base
+    // TODO ajouter les saves en base (fait ?)
 
 
     // TODO - Exemple des requetes possibles - supprimer la majorité
@@ -77,22 +76,11 @@ public class OpponentService {
         opponentDao.deleteById(id);
     }
 
-    public void deleteAll() {
-        opponentDao.deleteAll();
-    }
-
-    public void addOpponent(OpponentDto opponentDto) {
-        Opponent opponent = opponentMapper.fromDto(opponentDto);
+    public void addOpponent(Opponent opponent) {
         opponentDao.save(opponent);
     }
 
-    public void updateOpponent(OpponentDto opponentDto, Long id) {
-        Opponent opponent = opponentDao.findById(id).get();
-        opponent.setHealthPoint(opponentDto.getHealthPoint());
-        opponent.setAttackPoint(opponentDto.getAttackPoint());
-        opponent.setDefensePoint(opponentDto.getDefensePoint());
-        opponent.setMagicPoint(opponentDto.getMagicPoint());
-        opponent.setSpeed(opponentDto.getSpeed());
+    public void updateOpponent(Opponent opponent, Long id) {
         opponentDao.save(opponent);
     }
 

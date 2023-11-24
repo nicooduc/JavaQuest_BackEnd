@@ -74,7 +74,7 @@ public class FightService {
 
     private void actionPlayer(Opponent tempHero, Opponent tempMonster, String playerChoice) {
         System.out.println("Le joueur a choisi l'action " + playerChoice);
-        System.out.println("Le type du joueur est : " +tempHero.getType());
+        System.out.println("Le type du joueur est : " + tempHero.getType());
         switch (playerChoice) {
             case "attack":
                 System.out.println("Le hero attaque");

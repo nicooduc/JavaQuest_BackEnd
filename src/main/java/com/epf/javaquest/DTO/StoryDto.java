@@ -8,6 +8,8 @@ import lombok.Getter;
 public class StoryDto {
     private int descriptionID;
     private String textDescription;
+    private String  localisation;
+    private String image;
     private String option1;
     private int redirection1;
     private String option2;
@@ -16,4 +18,5 @@ public class StoryDto {
     private int redirection3;
     private String option4;
     private int redirection4;
+    private String effects;
 }
