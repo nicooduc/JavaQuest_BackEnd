@@ -23,7 +23,7 @@ public class FightService {
         System.out.println("Choix du monstre : " + actionMonster);
         //TODO récupérer les hero et monstres de la base
         List<Opponent> opponents = opponentDao.findAll();
-        if (opponents.get(0).getType().equals("hero")) {
+        if (opponents.get(0).getType().equals("Hero")) {
             heroIndex = 0;
             monsterIndex = 1;
         } else {
