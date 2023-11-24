@@ -10,21 +10,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin
-@RequestMapping("opponent")
+@RequestMapping("fight")
 @RestController
 @RequiredArgsConstructor
-public class OpponentController {
+public class FightController {
     private final OpponentService opponentService;
+    private final FightService fightService;
 
     @GetMapping("/startCombat")
     public List<Opponent> startCombat() {
         return opponentService.startCombat();
     }
 
-    @GetMapping("/attack")
-    public List<Opponent> attack() {
-        return opponentService.heroAttack();
+    @GetMapping("/turn/{action}")
+    public List<Opponent> turn(@PathVariable String action) {
+        return fightService.turn(action);
     }
+
+
+
+
+
+
+    // TODO supprimer les lignes suivantes après s'en être inspiré
+
     @GetMapping("")
     public List<Opponent> listOpponents() {
         return opponentService.findAll();

@@ -63,7 +63,6 @@ public class Opponent {
     public void choiceDefense() {
         System.out.println("PASSAGE EN MODE DEFENSE DU MONSTRE (yuuuuu-gi-ooooh)");
         defensePoint *= DEFENSE_MODIFIER;
-
     }
 
     public void resetDefense() {
