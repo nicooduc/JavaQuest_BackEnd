@@ -58,6 +58,7 @@ create table story
     redirection3     int  not null,
     option4          TEXT not null,
     redirection4     int  not null,
-    effects          TEXT null
+    effects          TEXT null,
+    monsterID        int null
 
 );
