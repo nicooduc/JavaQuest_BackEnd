@@ -18,4 +18,5 @@ public class StoryDto {
     private String option4;
     private int redirection4;
     private int monsterID;
+
 }
