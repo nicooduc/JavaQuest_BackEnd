@@ -16,8 +16,8 @@ public class StoryService {
     private final StoryDao storyDao;
     private final HeroDao heroDao;
 
-    public Story startStory() {
-        return storyDao.findByDescriptionID(1);
+    public Story startStory(int storyNextID) {
+        return storyDao.findByDescriptionID(storyNextID);
     }
 
     public Story storyChoice(int choice) {

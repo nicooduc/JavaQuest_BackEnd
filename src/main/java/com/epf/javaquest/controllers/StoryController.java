@@ -15,9 +15,9 @@ public class StoryController {
     private final StoryService storyService;
 
     //TODO startStory doit pouvoir reprendre le dernier id
-    @GetMapping("/startStory")
-    public Story startStory() {
-        return storyService.startStory();
+    @GetMapping("/startStory/{storyNextID}")
+    public Story startStory(@PathVariable int storyNextID) {
+        return storyService.startStory(storyNextID);
     }
 
     @GetMapping("/story/{choice}")
