@@ -23,10 +23,14 @@ public class OpponentService {
 
     public List<OpponentDto> startCombat(int idMonster) {
         opponentDao.deleteAll();
-        System.out.println("Le monstre a affronter est :"+idMonster);
+        System.out.println("Le monstre a affronter est :" + idMonster);
+        System.out.println("Test récup hero " + heroDao.findById(0L).get());
         Hero hero = heroDao.findById(0L).get(); // update 0 if multiple heroes available
+        System.out.println("Le hero est récupéré " + hero.toString());
         generateOpponentHero(hero);
+        System.out.println("Le hero est généré ");
         generateOpponentMonster(monsterDao.findById((long) idMonster).get());
+
         return OpponentMapper.toDtoList(opponentDao.findAll());
     }
 
@@ -45,6 +49,7 @@ public class OpponentService {
     }
 
     private void generateOpponentMonster(Monster monster) {
+        System.out.println("Le monstre est : " + monster);
         Opponent opponent = Opponent.builder()
                 .origin_id(monster.getId())
                 .type("Monster")
