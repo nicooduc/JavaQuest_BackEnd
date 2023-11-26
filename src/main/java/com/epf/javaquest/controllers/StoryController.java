@@ -15,6 +15,7 @@ public class StoryController {
 
     @GetMapping("/startStory/{storyNextID}")
     public StoryDto startStory(@PathVariable int storyNextID) {
+        System.out.println("StoryController story id : " +  storyNextID);
         return storyService.startStory(storyNextID);
     }
 
