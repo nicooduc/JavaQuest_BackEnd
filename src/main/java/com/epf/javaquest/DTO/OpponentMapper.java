@@ -11,7 +11,6 @@ import java.io.IOException;
 public class OpponentMapper {
     public static Opponent fromDto(OpponentDto dto) {
         return Opponent.builder()
-                .origin_id(dto.getOrigin_id())
                 .type(dto.getType())
                 .name(dto.getName())
                 .image(dto.getImage())
@@ -25,7 +24,6 @@ public class OpponentMapper {
 
     public static OpponentDto toDto (Opponent opponent){
         return OpponentDto.builder()
-                .origin_id(opponent.getOrigin_id())
                 .type(opponent.getType())
                 .name(opponent.getName())
                 .image(opponent.getImage())

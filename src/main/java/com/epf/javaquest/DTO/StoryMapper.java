@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 public class StoryMapper {
     public static Story fromDto(StoryDto dto) {
         return Story.builder()
-                .descriptionID(dto.getDescriptionID())
                 .textDescription(dto.getTextDescription())
                 .localisation(dto.getLocalisation())
                 .image(dto.getImage())
@@ -21,13 +20,12 @@ public class StoryMapper {
                 .redirection3(dto.getRedirection3())
                 .option4(dto.getOption4())
                 .redirection4(dto.getRedirection4())
-                .effects(dto.getEffects())
+                .monsterID(dto.getMonsterID())
                 .build();
     }
 
     public static StoryDto toDto (Story story){
         return StoryDto.builder()
-                .descriptionID(story.getDescriptionID())
                 .textDescription(story.getTextDescription())
                 .localisation(story.getLocalisation())
                 .image(story.getImage())
@@ -39,7 +37,7 @@ public class StoryMapper {
                 .redirection3(story.getRedirection3())
                 .option4(story.getOption4())
                 .redirection4(story.getRedirection4())
-                .effects(story.getEffects())
+                .monsterID(story.getMonsterID())
                 .build();
     }
 }

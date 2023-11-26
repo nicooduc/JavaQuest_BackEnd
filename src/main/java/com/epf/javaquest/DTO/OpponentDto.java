@@ -6,7 +6,6 @@ import lombok.Getter;
 @Builder
 @Getter
 public class OpponentDto {
-    private Long origin_id;
     private String type;
     private String name;
     private String image;

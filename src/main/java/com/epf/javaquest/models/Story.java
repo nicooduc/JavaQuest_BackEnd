@@ -55,4 +55,7 @@ public class Story {
     @Column(name = "effects")
     private String effects;
 
+    @Column(name = "monsterID")
+    private int monsterID;
+
 }
