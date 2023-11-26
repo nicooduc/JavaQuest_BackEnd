@@ -33,6 +33,7 @@ create table monsters
 create table opponent
 (
     id            SERIAL PRIMARY KEY,
+    origin_id     BIGINT not null,
     type          TEXT not null,
     name          TEXT not null,
     image         TEXT null,
