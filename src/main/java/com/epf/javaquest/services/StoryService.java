@@ -2,6 +2,8 @@ package com.epf.javaquest.services;
 
 import com.epf.javaquest.DAO.HeroDao;
 import com.epf.javaquest.DAO.StoryDao;
+import com.epf.javaquest.DTO.StoryDto;
+import com.epf.javaquest.DTO.StoryMapper;
 import com.epf.javaquest.models.Hero;
 import com.epf.javaquest.models.Story;
 import lombok.RequiredArgsConstructor;
@@ -16,19 +18,19 @@ public class StoryService {
     private final StoryDao storyDao;
     private final HeroDao heroDao;
 
-    public Story startStory(int storyNextID) {
-        return storyDao.findByDescriptionID(storyNextID);
+    public StoryDto startStory(int storyNextID) {
+        return StoryMapper.toDto(storyDao.findByDescriptionID(storyNextID));
     }
 
-    public Story storyChoice(int choice) {
+    public StoryDto storyChoice(int choice) {
         Story story = storyDao.findByDescriptionID(choice);
         Map<String, Integer> modifiers = (story.getEffects() != null) ? parseModifiers(story.getEffects()) : new HashMap<>();
-        Hero hero = heroDao.findAll().get(0); //TODO  avoir plusieurs hero ???
+        Hero hero = heroDao.findAll().get(0); // update 0 if multiple heroes available
         System.out.println(modifiers);
         hero.updateStats(modifiers.getOrDefault("health_point", 0), modifiers.getOrDefault("attack_point", 0), modifiers.getOrDefault("defense_point", 0), modifiers.getOrDefault("magic_point", 0), modifiers.getOrDefault("speed", 0));
         hero.updateExp(modifiers.getOrDefault("exp", 0));
         heroDao.save(hero);
-        return story;
+        return StoryMapper.toDto(story);
     }
 
     private Map<String, Integer> parseModifiers(String inputModifiers) {
@@ -44,6 +46,4 @@ public class StoryService {
         }
         return modifiers;
     }
-
-
 }

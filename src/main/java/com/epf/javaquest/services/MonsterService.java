@@ -5,23 +5,15 @@ import com.epf.javaquest.models.Monster;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Random;
-
 @Component
 @RequiredArgsConstructor
 public class MonsterService {
     private final MonsterDao monsterDao;
 
-    //TODO classe probablement a supprimer
+    //classe pour la création d'un bestiaire ?
 
     public Monster getMonsterById(long id) {
         return monsterDao.findById(id).get();
     }
 
-    /*
-    classe à creer ? :
-    equipItem
-    unequipItem
-    getInventory
-     */
 }

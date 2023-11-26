@@ -16,7 +16,7 @@ public class Story {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-     @Column(name = "descriptionID", nullable = false)
+    @Column(name = "descriptionID", nullable = false)
     private int descriptionID;
 
     @Column(name = "text_description", nullable = false)

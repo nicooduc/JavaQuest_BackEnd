@@ -3,6 +3,8 @@ package com.epf.javaquest.services;
 import com.epf.javaquest.DAO.HeroDao;
 import com.epf.javaquest.DAO.MonsterDao;
 import com.epf.javaquest.DAO.OpponentDao;
+import com.epf.javaquest.DTO.OpponentDto;
+import com.epf.javaquest.DTO.OpponentMapper;
 import com.epf.javaquest.models.Hero;
 import com.epf.javaquest.models.Monster;
 import com.epf.javaquest.models.Opponent;
@@ -19,12 +21,12 @@ public class OpponentService {
     private final MonsterDao monsterDao;
     private final HeroDao heroDao;
 
-    public List<Opponent> startCombat(int idMonster) {
+    public List<OpponentDto> startCombat(int idMonster) {
         opponentDao.deleteAll();
-        Hero hero = heroDao.findAll().get(0); //TODO multiple heros ???
+        Hero hero = heroDao.findById(0L).get(); // update 0 if multiple heroes available
         generateOpponentHero(hero);
         generateOpponentMonster(monsterDao.findById((long) idMonster).get());
-        return opponentDao.findAll();
+        return OpponentMapper.toDtoList(opponentDao.findAll());
     }
 
     private void generateOpponentHero(Hero hero) {
@@ -66,62 +68,4 @@ public class OpponentService {
         checkIndex = opponents.get(0).getType().equals(type) ? 0 : 1;
         return opponents.get(checkIndex).isDead();
     }
-
-    //TODO vérification de la mort des opponents
-
-
-    // TODO toutes les fonctions en dessous étaient pour le fonctionnement backend
-
-    // TODO ajouter les saves en base (fait ?)
-
-
-    // TODO - Exemple des requetes possibles - supprimer la majorité
-    public List<Opponent> findAll() {
-        return opponentDao.findAll();
-    }
-
-    public Opponent getById(Long id) {
-        return opponentDao.findById(id).get();
-    }
-
-    public void deleteById(Long id) {
-        opponentDao.deleteById(id);
-    }
-
-    public void addOpponent(Opponent opponent) {
-        opponentDao.save(opponent);
-    }
-
-    public void updateOpponent(Opponent opponent, Long id) {
-        opponentDao.save(opponent);
-    }
-
-
-//    public List<Opponent> heroAttack() {
-//        int hero;
-//        int monster;
-//        List<Opponent> opponents = opponentDao.findAll();
-//        if (opponents.get(0).getType() .equals("hero")) {
-//            hero = 0;
-//            monster = 1;
-//        } else {
-//            hero = 1;
-//            monster = 0;
-//        }
-//        System.out.println(opponents.get(hero).getName());
-//
-//        int atk = opponents.get(hero).getAttackPoint();
-//        int def = opponents.get(monster).getDefensePoint();
-//        int dmgDone = atk - def;
-//
-//        if (dmgDone > 0) {
-//            System.out.println(opponents.get(hero).getName());
-//            opponents.get(monster).updateHealth(-dmgDone);
-//        } else {
-//            System.out.println(opponents.get(monster).getType() + "Defense Too Big !");
-//        }
-//
-//        opponentDao.save(opponents.get(monster));
-//        return opponents;
-//    }
 }

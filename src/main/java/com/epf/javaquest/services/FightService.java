@@ -3,6 +3,8 @@ package com.epf.javaquest.services;
 import com.epf.javaquest.DAO.HeroDao;
 import com.epf.javaquest.DAO.MonsterDao;
 import com.epf.javaquest.DAO.OpponentDao;
+import com.epf.javaquest.DTO.OpponentDto;
+import com.epf.javaquest.DTO.OpponentMapper;
 import com.epf.javaquest.models.Hero;
 import com.epf.javaquest.models.Monster;
 import com.epf.javaquest.models.Opponent;
@@ -21,7 +23,7 @@ public class FightService {
     private final MonsterDao monsterDao;
     private final HeroDao heroDao;
 
-    public List<Opponent> turn(String actionHero) {
+    public List<OpponentDto> turn(String actionHero) {
         System.out.println("Choix du hero : " + actionHero);
         int heroIndex;
         int monsterIndex;
@@ -59,27 +61,35 @@ public class FightService {
         endTurn(tempHero, tempMonster, actionHero, actionMonster);
         opponentDao.save(tempHero);
         opponentDao.save(tempMonster);
-        return opponentDao.findAll();
+        return OpponentMapper.toDtoList(opponentDao.findAll());
     }
 
-    public Integer endFight() {
-        int heroIndex;
-        int monsterIndex;
-        Hero hero;
-        List<Opponent> opponents = opponentDao.findAll();
-        heroIndex = opponents.get(0).getType().equals("Hero") ? 0 : 1;
-        monsterIndex = 1 - heroIndex;
+    public Integer endFight(boolean success) {
+        if (success) {
+            int heroIndex;
+            int monsterIndex;
+            Hero hero;
+            List<Opponent> opponents = opponentDao.findAll();
+            heroIndex = opponents.get(0).getType().equals("Hero") ? 0 : 1;
+            monsterIndex = 1 - heroIndex;
 
-        Optional<Hero> heroOptional = heroDao.findById(opponents.get(heroIndex).getOrigin_id());
-        Optional<Monster> monster = monsterDao.findById(opponents.get(monsterIndex).getOrigin_id());
-        int expGain = monster.map(Monster::getXpDrop).orElse(0);
-        if (heroOptional.isPresent()) {
-            hero = heroOptional.get();
-            expGain = hero.updateExp(expGain);
-            heroDao.save(hero);
+            Optional<Hero> heroOptional = heroDao.findById(opponents.get(heroIndex).getOrigin_id());
+            Optional<Monster> monster = monsterDao.findById(opponents.get(monsterIndex).getOrigin_id());
+            int expGain = monster.map(Monster::getXpDrop).orElse(0);
+            if (heroOptional.isPresent()) {
+                hero = heroOptional.get();
+                expGain = hero.updateExp(expGain);
+                heroDao.save(hero);
+            }
+            opponentDao.deleteAll();
+            return expGain;
+        } else {
+            heroDao.deleteById(0L); // update 0 if multiple heroes available
+            Hero.createHero("Cop", 1); //TODO hero par défault recréé, proposer l'option de création de hero au joueur
+            opponentDao.deleteAll();
+            return 0;
         }
-        opponentDao.deleteAll();
-        return expGain;
+
     }
 
     private String actionMonster() {
@@ -145,76 +155,4 @@ public class FightService {
             System.out.println(defender.getType() + "Defense Too Big !");
         }
     }
-
-
-    // TODO toutes les fonctions en dessous étaient pour le fonctionnement backend
-
-//        public boolean fightFunction (Hero hero, Monster monster){
-//            Opponent tempHero = opponentService.generateTempHero(hero);
-//            Opponent tempMonster = opponentService.generateTempMonster(monster);
-//            System.out.println("hero : " + tempHero);
-//            System.out.println("monster : " + tempMonster);
-//            do {
-//                turnFunction(tempHero, tempMonster);
-//                System.out.println("hero : " + tempHero);
-//                System.out.println("monster : " + tempMonster);
-//            } while (!tempMonster.isDead() && !tempHero.isDead());
-//
-//            if (tempMonster.isDead()) {
-//                System.out.println("VICTORYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY!");
-//                heroService.updateExp(hero, monster.getXpDrop());
-//            } else {
-//                System.out.println("LOOOOOOOOOOOOOOOOSSSSSSSSSSSEEEEEEERRRRRRRRRRRR");
-//            }
-//
-//            return true;
-//        }
-
-//        public boolean turnFunction (Opponent tempHero, Opponent tempMonster){
-//            int playerChoice = playerChoice();
-//            int monsterChoice = actionMonster();
-//            int speedHero = tempHero.getSpeed();
-//            int speedMonster = tempMonster.getSpeed();
-//
-//
-//            if (playerChoice == 2) {
-//                tempHero.choiceDefense();
-//            }
-//            if (monsterChoice == 2) {
-//                System.out.println("Il se prépare à encaisser !");
-//                tempMonster.choiceDefense();
-//            }
-//
-//            if (speedMonster <= speedHero) {
-//                actionPlayer(tempHero, tempMonster, playerChoice);
-//                actionMonster(tempMonster, tempHero, monsterChoice);
-//            } else {
-//                actionMonster(tempMonster, tempHero, monsterChoice);
-//                actionPlayer(tempHero, tempMonster, playerChoice);
-//            }
-//            endTurn(tempHero, tempMonster, playerChoice, monsterChoice);
-//
-//            return true;
-//        }
-
-
-//        public int playerChoice () {
-//            int choix;
-//
-//            // TODO connexion frontend
-//            Scanner scanner = new Scanner(System.in);
-//
-//            System.out.println("Veuillez entrer un chiffre : ");
-//            System.out.println("1. Atk");
-//            System.out.println("2. Def");
-//            System.out.println("3. Mag");
-//            System.out.println("Entrez votre choix (1-3) : ");
-//
-//            choix = scanner.nextInt();
-//
-////        scanner.close();
-//            return choix;
-//        }
-
-
 }

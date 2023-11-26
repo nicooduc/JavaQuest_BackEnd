@@ -1,10 +1,7 @@
 package com.epf.javaquest.models;
 
-import io.swagger.v3.oas.models.headers.Header;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Optional;
 
 @Entity
 @Setter

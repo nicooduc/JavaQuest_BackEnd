@@ -60,8 +60,7 @@ public class Hero {
                 .attackPoint(ATTACK_POINT_MULT * level)
                 .defensePoint(DEFENSE_POINT_MULT * level)
                 .magicPoint(MAGIC_POINT_MULT * level)
-                .exp(0)
-                .speed(SPEED_MULT)
+                .exp(0).speed(SPEED_MULT)
                 .build();
     }
 
