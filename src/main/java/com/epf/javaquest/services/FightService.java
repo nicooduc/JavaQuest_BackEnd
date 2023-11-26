@@ -65,31 +65,28 @@ public class FightService {
     }
 
     public Integer endFight(boolean success) {
-        if (success) {
-            int heroIndex;
-            int monsterIndex;
-            Hero hero;
-            List<Opponent> opponents = opponentDao.findAll();
-            heroIndex = opponents.get(0).getType().equals("Hero") ? 0 : 1;
-            monsterIndex = 1 - heroIndex;
+        List<Opponent> opponents = opponentDao.findAll();
+        int heroIndex = opponents.get(0).getType().equals("Hero") ? 0 : 1;
+        int monsterIndex = 1 - heroIndex;
 
-            Optional<Hero> heroOptional = heroDao.findById(opponents.get(heroIndex).getOrigin_id());
-            Optional<Monster> monster = monsterDao.findById(opponents.get(monsterIndex).getOrigin_id());
-            int expGain = monster.map(Monster::getXpDrop).orElse(0);
-            if (heroOptional.isPresent()) {
-                hero = heroOptional.get();
-                expGain = hero.updateExp(expGain);
-                heroDao.save(hero);
-            }
-            opponentDao.deleteAll();
-            return expGain;
+        Hero hero = getHeroFromOpponent(opponents.get(heroIndex));
+        Monster monster = monsterDao.findById(opponents.get(monsterIndex).getOrigin_id()).orElseThrow(() -> new RuntimeException("Monster not found"));
+        int expGain = monster.getXpDrop();
+
+        if (success) {
+            expGain = hero.updateExp(expGain);
+            heroDao.save(hero);
         } else {
             heroDao.deleteById(0L); // update 0 if multiple heroes available
-            Hero.createHero("Cop", 1); //TODO hero par défault recréé, proposer l'option de création de hero au joueur
-            opponentDao.deleteAll();
-            return 0;
+            Hero.createHero(hero.getName(), 1);
+            expGain = 0;
         }
+        opponentDao.deleteAll();
+        return expGain;
+    }
 
+    private Hero getHeroFromOpponent(Opponent opponent) {
+        return heroDao.findById(opponent.getOrigin_id()).orElseThrow(() -> new RuntimeException("Hero not found"));
     }
 
     private String actionMonster() {
