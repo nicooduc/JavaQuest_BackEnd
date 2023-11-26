@@ -1,5 +1,6 @@
 package com.epf.javaquest.services;
 
+import com.epf.javaquest.DAO.HeroDao;
 import com.epf.javaquest.DAO.MonsterDao;
 import com.epf.javaquest.DAO.OpponentDao;
 import com.epf.javaquest.models.Hero;
@@ -16,10 +17,12 @@ import java.util.Random;
 public class OpponentService {
     private final OpponentDao opponentDao;
     private final MonsterDao monsterDao;
+    private final HeroDao heroDao;
 
     public List<Opponent> startCombat() {
         opponentDao.deleteAll();
-        generateOpponentHero(Hero.createHero("Kop", 1));
+        Hero hero = heroDao.findAll().get(0); //TODO multiple heros ???
+        generateOpponentHero(hero);
         generateOpponentMonster(monsterDao.findById(1L).get());
         return opponentDao.findAll();
     }

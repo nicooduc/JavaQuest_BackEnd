@@ -66,6 +66,7 @@ public class Hero {
     }
 
     public void updateStats(int hpModifier, int atkModifier, int defModifier, int magModifier, int speedModifier) {
+        System.out.println("Update stats called");
         this.healthPoint += hpModifier;
         this.attackPoint += atkModifier;
         this.defensePoint += defModifier;
