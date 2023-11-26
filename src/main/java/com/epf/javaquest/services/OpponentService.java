@@ -23,6 +23,7 @@ public class OpponentService {
 
     public List<OpponentDto> startCombat(int idMonster) {
         opponentDao.deleteAll();
+        System.out.println("Le monstre a affronter est :"+idMonster);
         Hero hero = heroDao.findById(0L).get(); // update 0 if multiple heroes available
         generateOpponentHero(hero);
         generateOpponentMonster(monsterDao.findById((long) idMonster).get());

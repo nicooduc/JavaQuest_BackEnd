@@ -20,7 +20,7 @@ public class Monster {
     private String name;
 
     @Column(name = "image")
-    private byte[] image;
+    private String image;
 
     @Column(name = "hp_min")
     private Integer hpMin;

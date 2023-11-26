@@ -56,6 +56,6 @@ public class Story {
     private String effects;
 
     @Column(name = "monsterID")
-    private int monsterID;
+    private Integer monsterID;
 
 }

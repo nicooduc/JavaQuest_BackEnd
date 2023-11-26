@@ -28,7 +28,7 @@ public class Hero {
     private String name;
 
     @Column(name = "image")
-    private byte[] image;
+    private String image;
 
     @Column(name = "level", nullable = false)
     private int level;
