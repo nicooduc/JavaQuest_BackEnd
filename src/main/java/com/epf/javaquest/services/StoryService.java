@@ -19,7 +19,10 @@ public class StoryService {
     private final HeroDao heroDao;
 
     public StoryDto startStory(int storyNextID) {
-        return StoryMapper.toDto(storyDao.findByDescriptionID(storyNextID));
+        System.out.println("StoryService story id : " +  storyNextID);
+        Story story =  storyDao.findByDescriptionID(storyNextID);
+        System.out.println("StoryService story: " +  story.toString());
+        return StoryMapper.toDto(story);
     }
 
     public StoryDto storyChoice(int choice) {
