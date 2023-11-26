@@ -27,6 +27,15 @@ public class FightController {
         return fightService.turn(action);
     }
 
+    @GetMapping("/check{type}Status")
+    public boolean checkStatus(@PathVariable String type) {
+        return opponentService.checkStatus(type);
+    }
+
+    @GetMapping("/endFight")
+    public Integer endFight() {
+        return fightService.endFight();
+    }
 
 
 

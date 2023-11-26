@@ -74,13 +74,15 @@ public class Hero {
         this.speed += speedModifier;
     }
 
-    public void updateExp(int expModifier) {
+    public int updateExp(int expModifier) {
         this.exp += expModifier;
         int expToLevelUp = this.level * LEVEL_UP_EXP_MULT;
         if (this.exp >= expToLevelUp) {
             this.exp -= expToLevelUp;
             this.levelUp();
+            return -expModifier;
         }
+        return expModifier;
     }
 
     public void levelUp() {

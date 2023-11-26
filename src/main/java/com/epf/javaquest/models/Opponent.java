@@ -19,6 +19,9 @@ public class Opponent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "origin_id", nullable = false)
+    private Long origin_id;
+
     @Column(name = "type", nullable = false)
     private String type;
 

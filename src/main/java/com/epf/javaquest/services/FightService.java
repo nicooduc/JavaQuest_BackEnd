@@ -1,19 +1,25 @@
 package com.epf.javaquest.services;
 
+import com.epf.javaquest.DAO.HeroDao;
+import com.epf.javaquest.DAO.MonsterDao;
 import com.epf.javaquest.DAO.OpponentDao;
+import com.epf.javaquest.models.Hero;
+import com.epf.javaquest.models.Monster;
 import com.epf.javaquest.models.Opponent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Random;
 
 @Component
 @RequiredArgsConstructor
 public class FightService {
-    private final HeroService heroService;
     private final OpponentDao opponentDao;
+    private final MonsterDao monsterDao;
+    private final HeroDao heroDao;
 
     public List<Opponent> turn(String actionHero) {
         System.out.println("Choix du hero : " + actionHero);
@@ -21,15 +27,9 @@ public class FightService {
         int monsterIndex;
         String actionMonster = actionMonster();
         System.out.println("Choix du monstre : " + actionMonster);
-        //TODO récupérer les hero et monstres de la base
         List<Opponent> opponents = opponentDao.findAll();
-        if (opponents.get(0).getType().equals("Hero")) {
-            heroIndex = 0;
-            monsterIndex = 1;
-        } else {
-            heroIndex = 1;
-            monsterIndex = 0;
-        }
+        heroIndex = opponents.get(0).getType().equals("Hero") ? 0 : 1;
+        monsterIndex = 1 - heroIndex;
         Opponent tempHero = opponents.get(heroIndex);
         Opponent tempMonster = opponents.get(monsterIndex);
         System.out.println("tempHero.type = " + tempHero.getType());
@@ -60,6 +60,26 @@ public class FightService {
         opponentDao.save(tempHero);
         opponentDao.save(tempMonster);
         return opponentDao.findAll();
+    }
+
+    public Integer endFight() {
+        int heroIndex;
+        int monsterIndex;
+        Hero hero;
+        List<Opponent> opponents = opponentDao.findAll();
+        heroIndex = opponents.get(0).getType().equals("Hero") ? 0 : 1;
+        monsterIndex = 1 - heroIndex;
+
+        Optional<Hero> heroOptional = heroDao.findById(opponents.get(heroIndex).getOrigin_id());
+        Optional<Monster> monster = monsterDao.findById(opponents.get(monsterIndex).getOrigin_id());
+        int expGain = monster.map(Monster::getXpDrop).orElse(0);
+        if (heroOptional.isPresent()) {
+            hero = heroOptional.get();
+            expGain = hero.updateExp(expGain);
+            heroDao.save(hero);
+        }
+        opponentDao.deleteAll();
+        return expGain;
     }
 
     private String actionMonster() {

@@ -29,6 +29,7 @@ public class OpponentService {
 
     private void generateOpponentHero(Hero hero) {
         Opponent opponent = Opponent.builder()
+                .origin_id(hero.getId())
                 .type("Hero")
                 .name(hero.getName())
                 .healthPoint(hero.getHealthPoint())
@@ -42,6 +43,7 @@ public class OpponentService {
 
     private void generateOpponentMonster(Monster monster) {
         Opponent opponent = Opponent.builder()
+                .origin_id(monster.getId())
                 .type("Monster")
                 .name(monster.getName())
                 .healthPoint(statisticRandomizer(monster.getHpMin(), monster.getHpMax()))
@@ -56,6 +58,13 @@ public class OpponentService {
     private int statisticRandomizer(int stat_min, int stat_max) {
         Random random = new Random();
         return random.nextInt(stat_max - stat_min + 1) + stat_min;
+    }
+
+    public boolean checkStatus(String type) {
+        int checkIndex;
+        List<Opponent> opponents = opponentDao.findAll();
+        checkIndex = opponents.get(0).getType().equals(type) ? 0 : 1;
+        return opponents.get(checkIndex).isDead();
     }
 
     //TODO vérification de la mort des opponents
@@ -86,6 +95,7 @@ public class OpponentService {
     public void updateOpponent(Opponent opponent, Long id) {
         opponentDao.save(opponent);
     }
+
 
 //    public List<Opponent> heroAttack() {
 //        int hero;
