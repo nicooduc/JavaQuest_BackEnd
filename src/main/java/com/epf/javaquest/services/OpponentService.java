@@ -19,11 +19,11 @@ public class OpponentService {
     private final MonsterDao monsterDao;
     private final HeroDao heroDao;
 
-    public List<Opponent> startCombat() {
+    public List<Opponent> startCombat(int idMonster) {
         opponentDao.deleteAll();
         Hero hero = heroDao.findAll().get(0); //TODO multiple heros ???
         generateOpponentHero(hero);
-        generateOpponentMonster(monsterDao.findById(1L).get());
+        generateOpponentMonster(monsterDao.findById((long) idMonster).get());
         return opponentDao.findAll();
     }
 

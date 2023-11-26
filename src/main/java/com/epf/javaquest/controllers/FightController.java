@@ -17,9 +17,9 @@ public class FightController {
     private final FightService fightService;
 
     //TODO startCombat doit pouvoir prendre l'id du monstre
-    @GetMapping("/startCombat")
-    public List<Opponent> startCombat() {
-        return opponentService.startCombat();
+    @GetMapping("/startCombat/{idMonster}")
+    public List<Opponent> startCombat(@PathVariable int idMonster) {
+        return opponentService.startCombat(idMonster);
     }
 
     @GetMapping("/turn/{action}")
