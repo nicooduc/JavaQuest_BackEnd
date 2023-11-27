@@ -30,7 +30,14 @@ public class OpponentService {
      */
     public List<OpponentDto> startCombat(int idMonster) {
         opponentDao.deleteAll();
-        Hero hero = heroDao.findById(1L).get(); // Mettre à jour avec 0 s'il y a plusieurs héros disponibles
+        List<Hero> heroList = heroDao.findAll(); // Mettre à jour avec 0 s'il y a plusieurs héros disponibles
+        Hero hero = null;
+        for (Hero heroL : heroList) {
+            if (heroL.getName().equals("Hero1")) {
+                hero = heroL;
+                break;
+            }
+        }
         generateOpponentHero(hero);
         generateOpponentMonster(monsterDao.findById((long) idMonster).get());
 
