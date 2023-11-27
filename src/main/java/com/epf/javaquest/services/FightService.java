@@ -81,7 +81,7 @@ public class FightService {
             heroDao.save(hero);
         } else {
             heroDao.deleteById(1L); // update 0 if multiple heroes available
-            Hero.createHero(hero.getName(), 1);
+            heroDao.save(Hero.createHero(hero.getName(), 1));
             expGain = 0;
         }
         opponentDao.deleteAll();
