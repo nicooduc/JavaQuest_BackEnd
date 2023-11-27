@@ -3,6 +3,9 @@ package com.epf.javaquest.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * Entité représentant une étape de l'histoire dans le jeu.
+ */
 @Entity
 @Setter
 @Getter
@@ -57,5 +60,4 @@ public class Story {
 
     @Column(name = "monsterID")
     private Integer monsterID;
-
 }

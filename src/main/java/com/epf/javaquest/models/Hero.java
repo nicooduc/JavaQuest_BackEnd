@@ -3,6 +3,9 @@ package com.epf.javaquest.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * Entité représentant le héros dans le jeu.
+ */
 @Entity
 @Setter
 @Getter
@@ -51,6 +54,13 @@ public class Hero {
     @Column(name = "speed", nullable = false)
     private int speed;
 
+    /**
+     * Crée un héros avec des statistiques de base en fonction du niveau.
+     *
+     * @param name  Le nom du héros.
+     * @param level Le niveau du héros.
+     * @return Une instance de la classe {@code Hero}.
+     */
     public static Hero createHero(String name, int level) {
         return Hero.builder()
                 .name(name)
@@ -64,8 +74,16 @@ public class Hero {
                 .build();
     }
 
+    /**
+     * Met à jour les statistiques du héros en fonction des modifications spécifiées.
+     *
+     * @param hpModifier    Modificateur de points de vie.
+     * @param atkModifier   Modificateur de points d'attaque.
+     * @param defModifier   Modificateur de points de défense.
+     * @param magModifier   Modificateur de points de magie.
+     * @param speedModifier Modificateur de vitesse.
+     */
     public void updateStats(int hpModifier, int atkModifier, int defModifier, int magModifier, int speedModifier) {
-        System.out.println("Update stats called");
         this.healthPoint += hpModifier;
         this.attackPoint += atkModifier;
         this.defensePoint += defModifier;
@@ -73,6 +91,12 @@ public class Hero {
         this.speed += speedModifier;
     }
 
+    /**
+     * Met à jour l'expérience du héros en fonction du modificateur spécifié.
+     *
+     * @param expModifier Modificateur d'expérience.
+     * @return Le modificateur d'expérience mis à jour.
+     */
     public int updateExp(int expModifier) {
         this.exp += expModifier;
         int expToLevelUp = this.level * LEVEL_UP_EXP_MULT;
@@ -84,6 +108,9 @@ public class Hero {
         return expModifier;
     }
 
+    /**
+     * Augmente le niveau du héros et met à jour ses statistiques.
+     */
     public void levelUp() {
         this.level += LVL_INCR;
         this.updateStats(HEALTH_POINT_MULT, ATTACK_POINT_MULT, DEFENSE_POINT_MULT, MAGIC_POINT_MULT, SPEED_MULT);

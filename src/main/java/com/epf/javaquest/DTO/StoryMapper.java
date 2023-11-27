@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class StoryMapper {
     public static StoryDto toDto (Story story){
-        System.out.println("TODTO debut : " + story.getImage());
-        StoryDto story2 =  StoryDto.builder()
+        return StoryDto.builder()
                 .textDescription(story.getTextDescription())
                 .localisation(story.getLocalisation())
                 .image(story.getImage())
@@ -23,7 +22,5 @@ public class StoryMapper {
                 .redirection4(story.getRedirection4())
                 .monsterID(story.getMonsterID())
                 .build();
-        System.out.println("TODTO fin : " + story2.getImage());
-        return story2;
     }
 }
