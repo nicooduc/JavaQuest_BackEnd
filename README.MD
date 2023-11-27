@@ -1,6 +1,6 @@
-**#JavaQuest Game Setup Guide**
+# JavaQuest Game Setup Guide
 
-##Prérequis
+## Prérequis
 Assurez-vous d'avoir IntelliJ et Angular CLI installés sur votre machine.
 
 ##Étapes d'Installation
