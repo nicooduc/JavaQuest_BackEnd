@@ -1,11 +1,11 @@
 package com.epf.javaquest.models;
 
-import io.swagger.v3.oas.models.headers.Header;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Optional;
-
+/**
+ * Entité représentant un monstre dans le jeu.
+ */
 @Entity
 @Setter
 @Getter
@@ -23,7 +23,7 @@ public class Monster {
     private String name;
 
     @Column(name = "image")
-    private byte[] image;
+    private String image;
 
     @Column(name = "hp_min")
     private Integer hpMin;
@@ -57,5 +57,4 @@ public class Monster {
 
     @Column(name = "speed_max")
     private int speedMax;
-
 }

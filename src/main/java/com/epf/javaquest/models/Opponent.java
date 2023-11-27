@@ -3,6 +3,9 @@ package com.epf.javaquest.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * Entité représentant un adversaire (héros ou monstre) dans le jeu.
+ */
 @Entity
 @Setter
 @Getter
@@ -19,6 +22,9 @@ public class Opponent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "origin_id", nullable = false)
+    private Long origin_id;
+
     @Column(name = "type", nullable = false)
     private String type;
 
@@ -26,7 +32,7 @@ public class Opponent {
     private String name;
 
     @Column(name = "image")
-    private byte[] image;
+    private String image;
 
     @Column(name = "health_point", nullable = false)
     private int healthPoint;
@@ -43,39 +49,59 @@ public class Opponent {
     @Column(name = "speed", nullable = false)
     private int speed;
 
+    /**
+     * Met à jour les points de vie de l'adversaire.
+     */
     public void updateHealth(int hp_modifier) {
-        System.out.println(name);
         healthPoint += hp_modifier;
     }
 
+    /**
+     * Met à jour les points d'attaque de l'adversaire.
+     */
     public void updateAttack(int atk_modifier) {
         attackPoint += atk_modifier;
     }
 
+    /**
+     * Met à jour les points de défense de l'adversaire.
+     */
     public void updateDefense(int def_modifier) {
         defensePoint += def_modifier;
     }
 
+    /**
+     * Met à jour les points de magie de l'adversaire.
+     */
     public void updateMagic(int mag_modifier) {
         magicPoint += mag_modifier;
     }
 
+    /**
+     * Active le mode défense de l'adversaire.
+     */
     public void choiceDefense() {
-        System.out.println("Passage en mode defense du " + type);
         defensePoint *= DEFENSE_MODIFIER;
     }
 
+    /**
+     * Désactive le mode défense de l'adversaire.
+     */
     public void resetDefense() {
-        System.out.println("Sortie du mode defense du " + type);
         defensePoint /= DEFENSE_MODIFIER;
     }
 
+    /**
+     * Régénère les points de vie et de magie de l'adversaire.
+     */
     public void regenHealthMag() {
         healthPoint += HEALTH_MODIFIER;
     }
 
+    /**
+     * Vérifie si l'adversaire est mort.
+     */
     public boolean isDead() {
         return healthPoint <= 0;
     }
-
 }

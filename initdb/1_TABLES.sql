@@ -33,6 +33,7 @@ create table monsters
 create table opponent
 (
     id            SERIAL PRIMARY KEY,
+    origin_id     BIGINT not null,
     type          TEXT not null,
     name          TEXT not null,
     image         TEXT null,
@@ -49,6 +50,7 @@ create table story
     descriptionID    int not null,
     text_description TEXT not null,
     localisation     TEXT not null,
+    image            TEXT null,
     option1          TEXT not null,
     redirection1     int  not null,
     option2          TEXT not null,
@@ -56,6 +58,8 @@ create table story
     option3          TEXT not null,
     redirection3     int  not null,
     option4          TEXT not null,
-    redirection4     int  not null
+    redirection4     int  not null,
+    effects          TEXT null,
+    monsterID        int null
 
 );

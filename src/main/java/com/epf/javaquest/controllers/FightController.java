@@ -1,7 +1,6 @@
 package com.epf.javaquest.controllers;
 
 import com.epf.javaquest.DTO.OpponentDto;
-import com.epf.javaquest.models.Opponent;
 import com.epf.javaquest.services.FightService;
 import com.epf.javaquest.services.OpponentService;
 import lombok.RequiredArgsConstructor;
@@ -17,45 +16,27 @@ public class FightController {
     private final OpponentService opponentService;
     private final FightService fightService;
 
-    @GetMapping("/startCombat")
-    public List<Opponent> startCombat() {
-        return opponentService.startCombat();
+    // Démarre un combat avec un monstre spécifique
+    @GetMapping("/startCombat/{idMonster}")
+    public List<OpponentDto> startCombat(@PathVariable int idMonster) {
+        return opponentService.startCombat(idMonster);
     }
 
+    // Effectue une action pendant le combat (Attaque, Défense, Magie, etc.)
     @GetMapping("/turn/{action}")
-    public List<Opponent> turn(@PathVariable String action) {
+    public List<OpponentDto> turn(@PathVariable String action) {
         return fightService.turn(action);
     }
 
-
-
-
-
-
-    // TODO supprimer les lignes suivantes après s'en être inspiré
-
-    @GetMapping("")
-    public List<Opponent> listOpponents() {
-        return opponentService.findAll();
+    // Vérifie l'état de vie d'un type d'opposant (Hero ou Monster)
+    @GetMapping("/check{type}Status")
+    public boolean checkStatus(@PathVariable String type) {
+        return opponentService.checkStatus(type);
     }
 
-    @GetMapping("/{id}")
-    public Opponent getOpponentById(@PathVariable Long id) {
-        return opponentService.getById(id);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteOpponent(@PathVariable Long id) {
-        opponentService.deleteById(id);
-    }
-
-    @PostMapping("")
-    public void addOpponent(@RequestBody OpponentDto opponentDto) {
-        opponentService.addOpponent(opponentDto);
-    }
-
-    @PostMapping("/{id}")
-    public void updateOpponent(@RequestBody OpponentDto opponentDto, @PathVariable Long id) {
-        opponentService.updateOpponent(opponentDto, id);
+    // Termine le combat, indiquant le succès ou l'échec, et retourne les points d'expérience gagnés
+    @GetMapping("/endFight/{success}")
+    public Integer endFight(@PathVariable boolean success) {
+        return fightService.endFight(success);
     }
 }

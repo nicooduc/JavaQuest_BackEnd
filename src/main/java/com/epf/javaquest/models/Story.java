@@ -3,6 +3,9 @@ package com.epf.javaquest.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * Entité représentant une étape de l'histoire dans le jeu.
+ */
 @Entity
 @Setter
 @Getter
@@ -16,7 +19,7 @@ public class Story {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-     @Column(name = "descriptionID", nullable = false)
+    @Column(name = "descriptionID", nullable = false)
     private int descriptionID;
 
     @Column(name = "text_description", nullable = false)
@@ -24,6 +27,9 @@ public class Story {
 
     @Column(name = "localisation", nullable = false)
     private String localisation;
+
+    @Column(name = "image")
+    private String image;
 
     @Column(name = "option1", nullable = false)
     private String option1;
@@ -49,4 +55,9 @@ public class Story {
     @Column(name = "redirection4", nullable = false)
     private int redirection4;
 
+    @Column(name = "effects")
+    private String effects;
+
+    @Column(name = "monsterID")
+    private Integer monsterID;
 }

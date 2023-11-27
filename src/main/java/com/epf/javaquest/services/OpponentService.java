@@ -1,5 +1,7 @@
 package com.epf.javaquest.services;
 
+import com.epf.javaquest.DAO.HeroDao;
+import com.epf.javaquest.DAO.MonsterDao;
 import com.epf.javaquest.DAO.OpponentDao;
 import com.epf.javaquest.DTO.OpponentDto;
 import com.epf.javaquest.DTO.OpponentMapper;
@@ -16,32 +18,52 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class OpponentService {
     private final OpponentDao opponentDao;
-    private final OpponentMapper opponentMapper;
-    private final HeroService heroService;
-    private final MonsterService monsterService;
+    private final MonsterDao monsterDao;
+    private final HeroDao heroDao;
 
-    public List<Opponent> startCombat() {
-        deleteAll();
-        generateTempHero(heroService.generateHero("Kop", 1));
-        generateTempMonster(monsterService.getMonsterById(1));
-        return opponentDao.findAll();
+    /**
+     * Démarre un combat en supprimant tous les opposants existants, génère un héros et un monstre,
+     * puis retourne la liste des opposants sous forme de DTO.
+     *
+     * @param idMonster ID du monstre à affronter
+     * @return Liste des opposants en tant que DTO
+     */
+    public List<OpponentDto> startCombat(int idMonster) {
+        opponentDao.deleteAll();
+        Hero hero = heroDao.findById(1L).get(); // Mettre à jour avec 0 s'il y a plusieurs héros disponibles
+        generateOpponentHero(hero);
+        generateOpponentMonster(monsterDao.findById((long) idMonster).get());
+
+        return OpponentMapper.toDtoList(opponentDao.findAll());
     }
 
-    private void generateTempHero(Hero hero) {
+    /**
+     * Génère un opposant de type héros à partir des caractéristiques d'un héros donné.
+     *
+     * @param hero Héros à partir duquel générer l'opposant
+     */
+    private void generateOpponentHero(Hero hero) {
         Opponent opponent = Opponent.builder()
-                .type("Hero")
-                .name(hero.getName())
+                .origin_id(hero.getId())
+                .type("Hero").name(hero.getName())
                 .healthPoint(hero.getHealthPoint())
                 .attackPoint(hero.getAttackPoint())
                 .defensePoint(hero.getDefensePoint())
                 .magicPoint(hero.getMagicPoint())
                 .speed(hero.getSpeed())
+                .image(hero.getImage())
                 .build();
         opponentDao.save(opponent);
     }
 
-    private void generateTempMonster(Monster monster) {
+    /**
+     * Génère un opposant de type monstre à partir des caractéristiques d'un monstre donné.
+     *
+     * @param monster Monstre à partir duquel générer l'opposant
+     */
+    private void generateOpponentMonster(Monster monster) {
         Opponent opponent = Opponent.builder()
+                .origin_id(monster.getId())
                 .type("Monster")
                 .name(monster.getName())
                 .healthPoint(statisticRandomizer(monster.getHpMin(), monster.getHpMax()))
@@ -49,78 +71,33 @@ public class OpponentService {
                 .defensePoint(statisticRandomizer(monster.getDefMin(), monster.getDefMax()))
                 .magicPoint(statisticRandomizer(monster.getMagMin(), monster.getMagMax()))
                 .speed(statisticRandomizer(monster.getSpeedMin(), monster.getSpeedMax()))
+                .image(monster.getImage())
                 .build();
         opponentDao.save(opponent);
     }
 
+    /**
+     * Génère un nombre aléatoire compris entre les valeurs minimales et maximales spécifiées.
+     *
+     * @param stat_min Valeur minimale de la statistique
+     * @param stat_max Valeur maximale de la statistique
+     * @return Nombre aléatoire généré
+     */
     private int statisticRandomizer(int stat_min, int stat_max) {
         Random random = new Random();
         return random.nextInt(stat_max - stat_min + 1) + stat_min;
     }
 
-
-    // TODO toutes les fonctions en dessous étaient pour le fonctionnement backend
-
-    // TODO ajouter les saves en base
-
-
-    // TODO - Exemple des requetes possibles - supprimer la majorité
-    public List<Opponent> findAll() {
-        return opponentDao.findAll();
+    /**
+     * Vérifie l'état de santé d'un opposant en fonction de son type.
+     *
+     * @param type Type de l'opposant (Hero ou Monster)
+     * @return true si l'opposant est mort, false sinon
+     */
+    public boolean checkStatus(String type) {
+        int checkIndex;
+        List<Opponent> opponents = opponentDao.findAll();
+        checkIndex = opponents.get(0).getType().equals(type) ? 0 : 1;
+        return opponents.get(checkIndex).isDead();
     }
-
-    public Opponent getById(Long id) {
-        return opponentDao.findById(id).get();
-    }
-
-    public void deleteById(Long id) {
-        opponentDao.deleteById(id);
-    }
-
-    public void deleteAll() {
-        opponentDao.deleteAll();
-    }
-
-    public void addOpponent(OpponentDto opponentDto) {
-        Opponent opponent = opponentMapper.fromDto(opponentDto);
-        opponentDao.save(opponent);
-    }
-
-    public void updateOpponent(OpponentDto opponentDto, Long id) {
-        Opponent opponent = opponentDao.findById(id).get();
-        opponent.setHealthPoint(opponentDto.getHealthPoint());
-        opponent.setAttackPoint(opponentDto.getAttackPoint());
-        opponent.setDefensePoint(opponentDto.getDefensePoint());
-        opponent.setMagicPoint(opponentDto.getMagicPoint());
-        opponent.setSpeed(opponentDto.getSpeed());
-        opponentDao.save(opponent);
-    }
-
-//    public List<Opponent> heroAttack() {
-//        int hero;
-//        int monster;
-//        List<Opponent> opponents = opponentDao.findAll();
-//        if (opponents.get(0).getType() .equals("hero")) {
-//            hero = 0;
-//            monster = 1;
-//        } else {
-//            hero = 1;
-//            monster = 0;
-//        }
-//        System.out.println(opponents.get(hero).getName());
-//
-//        int atk = opponents.get(hero).getAttackPoint();
-//        int def = opponents.get(monster).getDefensePoint();
-//        int dmgDone = atk - def;
-//
-//        if (dmgDone > 0) {
-//            System.out.println(opponents.get(hero).getName());
-//            opponents.get(monster).updateHealth(-dmgDone);
-//        } else {
-//            System.out.println(opponents.get(monster).getType() + "Defense Too Big !");
-//        }
-//
-//        opponentDao.save(opponents.get(monster));
-//        return opponents;
-//    }
 }
