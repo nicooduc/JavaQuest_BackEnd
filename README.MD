@@ -22,21 +22,23 @@ Assurez-vous d'avoir les éléments suivants installés sur votre machine :
    - URL : jdbc:postgresql://localhost:5432/JavaQuest
    - Port : 5432
 
-4. **Exécuter les Scripts d'Initialisation de la Base de Données**
+4. **Ouvrer l'application Docker, et faites 'docker compose up' dans le terminal d'IntelliJ**
+
+5. **Exécuter les Scripts d'Initialisation de la Base de Données**
    - Dans la section "initdb", sélectionnez et exécutez les trois fichiers d'initialisation de la base de données.
 
-5. **Démarrer le Backend**
+6. **Démarrer le Backend**
    - Lancez "BackSkeletonApplication" pour démarrer le backend du jeu.
 
-6. **Ouvrir le FrontEnd dans une Nouvelle Fenêtre de l'IDE**
+7. **Ouvrir le FrontEnd dans une Nouvelle Fenêtre de l'IDE**
 
-7. **Démarrer le Frontend**
+8. **Démarrer le Frontend**
    - Exécutez le "Serveur Angular CLI" pour démarrer le frontend.
 
-8. **Accéder au Jeu**
+9. **Accéder au Jeu**
    - Ouvrez votre navigateur web et allez sur [http://localhost:4200](http://localhost:4200).
 
-9. **Amusez-vous bien sur JavaQuest !**
+10. **Amusez-vous bien sur JavaQuest !**
 
 ## Auteurs
 
