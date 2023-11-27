@@ -43,7 +43,16 @@ public class OpponentService {
      * @param hero Héros à partir duquel générer l'opposant
      */
     private void generateOpponentHero(Hero hero) {
-        Opponent opponent = Opponent.builder().origin_id(hero.getId()).type("Hero").name(hero.getName()).healthPoint(hero.getHealthPoint()).attackPoint(hero.getAttackPoint()).defensePoint(hero.getDefensePoint()).magicPoint(hero.getMagicPoint()).speed(hero.getSpeed()).build();
+        Opponent opponent = Opponent.builder()
+                .origin_id(hero.getId())
+                .type("Hero").name(hero.getName())
+                .healthPoint(hero.getHealthPoint())
+                .attackPoint(hero.getAttackPoint())
+                .defensePoint(hero.getDefensePoint())
+                .magicPoint(hero.getMagicPoint())
+                .speed(hero.getSpeed())
+                .image(hero.getImage())
+                .build();
         opponentDao.save(opponent);
     }
 
@@ -53,7 +62,17 @@ public class OpponentService {
      * @param monster Monstre à partir duquel générer l'opposant
      */
     private void generateOpponentMonster(Monster monster) {
-        Opponent opponent = Opponent.builder().origin_id(monster.getId()).type("Monster").name(monster.getName()).healthPoint(statisticRandomizer(monster.getHpMin(), monster.getHpMax())).attackPoint(statisticRandomizer(monster.getAtkMin(), monster.getAtkMax())).defensePoint(statisticRandomizer(monster.getDefMin(), monster.getDefMax())).magicPoint(statisticRandomizer(monster.getMagMin(), monster.getMagMax())).speed(statisticRandomizer(monster.getSpeedMin(), monster.getSpeedMax())).build();
+        Opponent opponent = Opponent.builder()
+                .origin_id(monster.getId())
+                .type("Monster")
+                .name(monster.getName())
+                .healthPoint(statisticRandomizer(monster.getHpMin(), monster.getHpMax()))
+                .attackPoint(statisticRandomizer(monster.getAtkMin(), monster.getAtkMax()))
+                .defensePoint(statisticRandomizer(monster.getDefMin(), monster.getDefMax()))
+                .magicPoint(statisticRandomizer(monster.getMagMin(), monster.getMagMax()))
+                .speed(statisticRandomizer(monster.getSpeedMin(), monster.getSpeedMax()))
+                .image(monster.getImage())
+                .build();
         opponentDao.save(opponent);
     }
 
