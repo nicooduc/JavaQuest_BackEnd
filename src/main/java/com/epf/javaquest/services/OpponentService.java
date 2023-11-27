@@ -24,8 +24,8 @@ public class OpponentService {
     public List<OpponentDto> startCombat(int idMonster) {
         opponentDao.deleteAll();
         System.out.println("Le monstre a affronter est :" + idMonster);
-        System.out.println("Test récup hero " + heroDao.findById(0L).get());
-        Hero hero = heroDao.findById(0L).get(); // update 0 if multiple heroes available
+        System.out.println("Test récup hero " + heroDao.findById(1L).get());
+        Hero hero = heroDao.findById(1L).get(); // update 0 if multiple heroes available
         System.out.println("Le hero est récupéré " + hero.toString());
         generateOpponentHero(hero);
         System.out.println("Le hero est généré ");

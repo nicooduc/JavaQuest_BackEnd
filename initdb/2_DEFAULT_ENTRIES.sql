@@ -3,9 +3,9 @@ VALUES ('Hero1', NULL, 1, 8, 5, 2, 2, 0, 1);
 
 INSERT INTO monsters (name, image, hp_min, hp_max, atk_min, atk_max, def_min, def_max, mag_min, mag_max, xp_drop,
                       speed_min, speed_max)
-VALUES ('Gobelin', NULL, 10, 30, 4, 7, 1, 3, 1, 2, 101, 2, 5),
-       ('Chef des gobelin', NULL, 20, 22, 3, 5, 2, 4, 2, 3, 101, 1, 3),
-       ('Aventurier', NULL, 8, 12, 2, 4, 3, 5, 1, 2, 101, 1, 8),
+VALUES ('Gobelin', 'gobelin.png', 6, 8, 2, 3, 1, 3, 1, 2, 101, 2, 5),
+       ('Chef des gobelin', 'goblin_king.png', 20, 22, 3, 5, 2, 4, 2, 3, 101, 1, 3),
+       ('Aventurier', 'Aventurier.png', 8, 12, 2, 4, 3, 5, 1, 2, 101, 1, 8),
        ('Gladiateur', NULL, 8, 12, 3, 6, 2, 5, 1, 2, 101, 1, 8),
        ('groupe d''aventurier', NULL, 40, 60, 12, 22, 7, 10, 1, 2, 450, 1, 8),
        ('Garde de la ville', NULL, 10, 20, 7, 9, 5, 7, 1, 2, 100, 1, 8);
@@ -248,7 +248,7 @@ VALUES (1,
         'Continuer...', 46,
         'Continuer...', 46,
         'Continuer...', 46,
-        'Continuer...', 46, 'health_point : -2; speed: - 2', NULL),
+        'Continuer...', 46, 'health_point:-1;speed:-1', NULL),
        (20,'Les marchands ne vous remarquent pas, trop occupé à charger leur cargaison dans leur chariot. Un drap posé par dessus de celui-ci cache les marchandises',
         'Ecuries de Tantrop', NULL,
         'Se glisser discrètement dans le chariot', 78,
